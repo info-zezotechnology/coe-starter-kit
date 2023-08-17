@@ -63,7 +63,7 @@
           "type": "Bool",
           "metadata": {
             "schemaName": "admin_DisabledUsersareOrphaned",
-            "description": "Inventory - If true, then when an AD User is marked as disabled (Account enabled = false), they will be considered as orphaned. Default is false"
+            "description": "Inventory - If true (Yes), then when an AD User is marked as disabled (Account enabled = false), they will be considered as orphaned. Default is false (No)"
           }
         },
         "Power Automate Environment Variable (admin_PowerAutomateEnvironmentVariable)": {
@@ -78,7 +78,7 @@
       "triggers": {
         "manual": {
           "metadata": {
-            "operationMetadataId": "bd126d6c-a090-4ade-a7d9-1cf97d987e39"
+            "operationMetadataId": "c7b62e55-6c83-4a32-a64b-afef5bce1014"
           },
           "type": "Request",
           "kind": "Button",
@@ -93,13 +93,6 @@
                   "description": "Please enter your input",
                   "x-ms-content-hint": "TEXT"
                 },
-                "text_1": {
-                  "title": "MakerDisplayName",
-                  "type": "string",
-                  "x-ms-dynamically-added": true,
-                  "description": "Please enter your input",
-                  "x-ms-content-hint": "TEXT"
-                },
                 "boolean": {
                   "title": "Recheck",
                   "type": "boolean",
@@ -109,7 +102,8 @@
                 }
               },
               "required": [
-                "text"
+                "text",
+                "boolean"
               ]
             }
           }
@@ -157,7 +151,7 @@
                           "userisserviceprinciple": "@if(equals(true, first(outputs('Maker_checked_today')?['body/value'])?['admin_userisserviceprinciple']), true, false)",
                           "usercompany": "@{coalesce(first(outputs('Maker_checked_today')?['body/value'])?['admin_company'], '')}",
                           "userdepartment": "@{coalesce(first(outputs('Maker_checked_today')?['body/value'])?['admin_department'], '')}",
-                          "userdisplayname": "@{coalesce(first(outputs('Maker_checked_today')?['body/value'])?['admin_displayname'], triggerBody()['text_1'])}",
+                          "userdisplayname": "@{coalesce(first(outputs('Maker_checked_today')?['body/value'])?['admin_displayname'], '')}",
                           "usercity": "@{coalesce(first(outputs('Maker_checked_today')?['body/value'])?['admin_city'], '')}",
                           "usercountry": "@{coalesce(first(outputs('Maker_checked_today')?['body/value'])?['admin_country'], '')}",
                           "userpreferredlanguage": "@{coalesce(first(outputs('Maker_checked_today')?['body/value'])?['admin_preferredlanguage'], 'en-US')}",
@@ -166,7 +160,8 @@
                           "usermanagerid": "@{coalesce(first(outputs('Maker_checked_today')?['body/value'])?['admin_managerid'], '')}",
                           "usermanagername": "@{coalesce(first(outputs('Maker_checked_today')?['body/value'])?['admin_managerdisplayname'], '')}",
                           "userisenabled": "@if(equals(true, first(outputs('Maker_checked_today')?['body/value'])?['admin_accountenabled']), true, false)",
-                          "userupn": "@{coalesce(first(outputs('Maker_checked_today')?['body/value'])?['admin_userprincipalname'], '')}"
+                          "userupn": "@{coalesce(first(outputs('Maker_checked_today')?['body/value'])?['admin_userprincipalname'], '')}",
+                          "userstate": "@{coalesce(first(outputs('Maker_checked_today')?['body/value'])?['admin_stateorprovince'], '')}"
                         },
                         "schema": {
                           "type": "object",
@@ -245,6 +240,11 @@
                               "title": "userUPN",
                               "x-ms-dynamically-added": true,
                               "type": "string"
+                            },
+                            "userstate": {
+                              "title": "userState",
+                              "x-ms-dynamically-added": true,
+                              "type": "string"
                             }
                           }
                         }
@@ -293,7 +293,7 @@
                       },
                       {
                         "equals": [
-                          "@triggerBody()?['boolean']",
+                          "@triggerBody()['boolean']",
                           "@false"
                         ]
                       }
@@ -318,7 +318,7 @@
                     },
                     "parameters": {
                       "entityName": "admin_makers",
-                      "$select": "admin_makerisorphaned, admin_userisserviceprinciple, admin_useremail, admin_company, admin_department, admin_displayname, admin_city, admin_country, admin_preferredlanguage, admin_makerid, admin_userprincipalname, admin_managerid, admin_accountenabled, admin_managerdisplayname",
+                      "$select": "admin_makerisorphaned, admin_userisserviceprinciple, admin_useremail, admin_company, admin_department, admin_displayname, admin_city, admin_stateorprovince, admin_country, admin_preferredlanguage, admin_makerid, admin_userprincipalname, admin_managerid, admin_accountenabled, admin_managerdisplayname",
                       "$filter": "admin_makerid eq @{triggerBody()['text']} and modifiedon gt @{addDays(utcNow(), -1)}"
                     },
                     "authentication": {
@@ -350,7 +350,7 @@
                   {
                     "not": {
                       "equals": [
-                        "@triggerBody()?['boolean']",
+                        "@triggerBody()['boolean']",
                         "@true"
                       ]
                     }
@@ -392,7 +392,8 @@
                             "operationMetadataId": "acff48ef-b519-4fa3-843d-d4238db2d904"
                           },
                           "type": "Compose",
-                          "inputs": "@setProperty(variables('varMakerArray'), 'isSystem', true)"
+                          "inputs": "@setProperty(variables('varMakerArray'), 'isSystem', true)",
+                          "description": "setProperty(variables('varMakerArray'), 'isSystem', true)"
                         },
                         "Compose_System_Id": {
                           "runAfter": {
@@ -405,7 +406,7 @@
                           },
                           "type": "Compose",
                           "inputs": "@setProperty(variables('varMakerArray'), 'ID', first(body('List_Makers')?['value'])?['admin_makerid'])",
-                          "description": "first(body('List_Makers')?['value'])?['admin_makerid']"
+                          "description": "setProperty(variables('varMakerArray'), 'ID', first(body('List_Makers')?['value'])?['admin_makerid'])"
                         },
                         "update_variable_-_isSystem_true": {
                           "runAfter": {
@@ -448,7 +449,7 @@
                           },
                           "type": "Compose",
                           "inputs": "@setProperty(variables('varMakerArray'), 'DisplayName', 'SYSTEM')",
-                          "description": "first(body('List_Makers')?['value'])?['admin_makerid']"
+                          "description": "setProperty(variables('varMakerArray'), 'DisplayName', 'SYSTEM')"
                         },
                         "update_variable_-_System_DisplayName": {
                           "runAfter": {
@@ -569,13 +570,14 @@
                                 "value": {
                                   "isOrphan": "@first(outputs('See_if_maker_exists_and_updated_already_today')?['body/value'])['admin_makerisorphaned']",
                                   "isEnabled": "@first(outputs('See_if_maker_exists_and_updated_already_today')?['body/value'])['admin_accountenabled']",
-                                  "isSystem": "@if(equals(triggerBody()?['text_1'], 'SYSTEM'), true, false)",
+                                  "isSystem": "@if(equals(triggerBody()?['text'], 'SYSTEM'), true, false)",
                                   "isServicePrinciple": "@first(outputs('See_if_maker_exists_and_updated_already_today')?['body/value'])['admin_userisserviceprinciple']",
                                   "ID": "@coalesce(first(outputs('See_if_maker_exists_and_updated_already_today')?['body/value'])?['admin_makerid'], triggerBody()['text'])",
                                   "Company": "@coalesce(first(outputs('See_if_maker_exists_and_updated_already_today')?['body/value'])?['admin_company'], '')",
                                   "Department": "@coalesce(first(outputs('See_if_maker_exists_and_updated_already_today')?['body/value'])?['admin_department'], '')",
-                                  "DisplayName": "@coalesce(first(outputs('See_if_maker_exists_and_updated_already_today')?['body/value'])?['admin_displayname'], triggerBody()['text_1'])",
+                                  "DisplayName": "@coalesce(first(outputs('See_if_maker_exists_and_updated_already_today')?['body/value'])?['admin_displayname'], '')",
                                   "City": "@coalesce(first(outputs('See_if_maker_exists_and_updated_already_today')?['body/value'])?['admin_city'], '')",
+                                  "State": "@coalesce(first(outputs('See_if_maker_exists_and_updated_already_today')?['body/value'])?['admin_stateorprovince'], '')",
                                   "Country": "@coalesce(first(outputs('See_if_maker_exists_and_updated_already_today')?['body/value'])?['admin_country'], '')",
                                   "preferredLanguage": "@coalesce(first(outputs('See_if_maker_exists_and_updated_already_today')?['body/value'])?['admin_preferredlanguage'], 'en-US')",
                                   "Email": "@coalesce(first(outputs('See_if_maker_exists_and_updated_already_today')?['body/value'])?['admin_useremail'], '')",
@@ -610,6 +612,9 @@
                                         "actions": {
                                           "Update_Maker": {
                                             "runAfter": {},
+                                            "metadata": {
+                                              "operationMetadataId": "c710c77d-ef52-4970-a66a-1294458fe0ac"
+                                            },
                                             "type": "OpenApiConnection",
                                             "inputs": {
                                               "host": {
@@ -631,11 +636,15 @@
                                                 "item/admin_office": "@outputs('Get_user_profile_(V2)')?['body/officeLocation']",
                                                 "item/admin_preferredlanguage": "@if(equals(outputs('Get_user_profile_(V2)')?['body/preferredLanguage'], null), 'en-US', outputs('Get_user_profile_(V2)')?['body/preferredLanguage'])",
                                                 "item/admin_recordguidasstring": "@triggerBody()['text']",
+                                                "item/admin_stateorprovince": "@outputs('Get_user_profile_(V2)')?['body/state']",
                                                 "item/admin_useremail": "@outputs('Get_user_profile_(V2)')?['body/mail']",
                                                 "item/admin_userprincipalname": "@outputs('Get_user_profile_(V2)')?['body/userPrincipalName']",
                                                 "item/admin_userisserviceprinciple": false
                                               },
-                                              "authentication": "@parameters('$authentication')"
+                                              "authentication": {
+                                                "type": "Raw",
+                                                "value": "@json(decodeBase64(triggerOutputs().headers['X-MS-APIM-Tokens']))['$ConnectionKey']"
+                                              }
                                             }
                                           }
                                         },
@@ -648,6 +657,9 @@
                                           "actions": {
                                             "Add_Maker": {
                                               "runAfter": {},
+                                              "metadata": {
+                                                "operationMetadataId": "f7c445d3-264f-4c93-95e5-9931c2bd10cb"
+                                              },
                                               "type": "OpenApiConnection",
                                               "inputs": {
                                                 "host": {
@@ -669,11 +681,15 @@
                                                   "item/admin_office": "@outputs('Get_user_profile_(V2)')?['body/officeLocation']",
                                                   "item/admin_preferredlanguage": "@if(equals(outputs('Get_user_profile_(V2)')?['body/preferredLanguage'], null), 'en-US', outputs('Get_user_profile_(V2)')?['body/preferredLanguage'])",
                                                   "item/admin_recordguidasstring": "@triggerBody()['text']",
+                                                  "item/admin_stateorprovince": "@outputs('Get_user_profile_(V2)')?['body/state']",
                                                   "item/admin_useremail": "@outputs('Get_user_profile_(V2)')?['body/mail']",
                                                   "item/admin_userprincipalname": "@outputs('Get_user_profile_(V2)')?['body/userPrincipalName']",
                                                   "item/admin_userisserviceprinciple": false
                                                 },
-                                                "authentication": "@parameters('$authentication')"
+                                                "authentication": {
+                                                  "type": "Raw",
+                                                  "value": "@json(decodeBase64(triggerOutputs().headers['X-MS-APIM-Tokens']))['$ConnectionKey']"
+                                                }
                                               }
                                             },
                                             "Switch_on_output": {
@@ -689,6 +705,9 @@
                                                   "actions": {
                                                     "Success_-_NoOp": {
                                                       "runAfter": {},
+                                                      "metadata": {
+                                                        "operationMetadataId": "b404ead6-dd49-4274-9d47-0d96a26a180c"
+                                                      },
                                                       "type": "Compose",
                                                       "inputs": "nothing to do - succeeded"
                                                     }
@@ -699,6 +718,9 @@
                                                   "actions": {
                                                     "Just_Inserted_by_another_run_-_NoOp": {
                                                       "runAfter": {},
+                                                      "metadata": {
+                                                        "operationMetadataId": "b264376d-7ee8-472e-9c8c-509b5f3a8d1c"
+                                                      },
                                                       "type": "Compose",
                                                       "inputs": "catching for race condition. another flow just inserted this user. Nothing to do"
                                                     }
@@ -709,6 +731,9 @@
                                                 "actions": {
                                                   "Force_Failure": {
                                                     "runAfter": {},
+                                                    "metadata": {
+                                                      "operationMetadataId": "8cc201aa-db97-49e3-a0ef-51604f408402"
+                                                    },
                                                     "type": "Compose",
                                                     "inputs": "all other cases are real failures so fail"
                                                   },
@@ -717,6 +742,9 @@
                                                       "Force_Failure": [
                                                         "Succeeded"
                                                       ]
+                                                    },
+                                                    "metadata": {
+                                                      "operationMetadataId": "6ee3a3af-46e4-429f-b0d4-ca8d72645019"
                                                     },
                                                     "type": "OpenApiConnection",
                                                     "inputs": {
@@ -738,6 +766,9 @@
                                                 }
                                               },
                                               "expression": "@outputs('Add_Maker')['statusCode']",
+                                              "metadata": {
+                                                "operationMetadataId": "3fa2e975-5bfe-412b-9c0c-085bb23b9650"
+                                              },
                                               "type": "Switch"
                                             }
                                           }
@@ -748,6 +779,9 @@
                                             0
                                           ]
                                         },
+                                        "metadata": {
+                                          "operationMetadataId": "c7c6a77f-e733-41f8-bcdd-a7a033114e49"
+                                        },
                                         "type": "If"
                                       },
                                       "Get_manager_(V2)": {
@@ -755,6 +789,9 @@
                                           "Update_Maker_Array": [
                                             "Succeeded"
                                           ]
+                                        },
+                                        "metadata": {
+                                          "operationMetadataId": "1cc66a64-d7d4-4ada-96b3-691388b79f5d"
                                         },
                                         "type": "OpenApiConnection",
                                         "inputs": {
@@ -786,6 +823,9 @@
                                             "actions": {
                                               "Compose_ManagerID": {
                                                 "runAfter": {},
+                                                "metadata": {
+                                                  "operationMetadataId": "44db9b6d-da5e-4dab-9df8-a355143d7fcd"
+                                                },
                                                 "type": "Compose",
                                                 "inputs": "@setProperty(variables('varMakerArray'),'ManagerID',outputs('Get_manager_(V2)')?['body/id'])"
                                               },
@@ -795,6 +835,9 @@
                                                     "Succeeded"
                                                   ]
                                                 },
+                                                "metadata": {
+                                                  "operationMetadataId": "f6b42a89-ae3b-470e-804e-280228aa6686"
+                                                },
                                                 "type": "Compose",
                                                 "inputs": "@setProperty(variables('varMakerArray'),'ManagerName',outputs('Get_manager_(V2)')?['body/displayName'])"
                                               },
@@ -803,6 +846,9 @@
                                                   "Compose_ManagerID": [
                                                     "Succeeded"
                                                   ]
+                                                },
+                                                "metadata": {
+                                                  "operationMetadataId": "4a8957e4-999c-4fb6-8bf0-811ef6950b5b"
                                                 },
                                                 "type": "SetVariable",
                                                 "inputs": {
@@ -815,6 +861,9 @@
                                                   "Compose_ManagerName": [
                                                     "Succeeded"
                                                   ]
+                                                },
+                                                "metadata": {
+                                                  "operationMetadataId": "0e8f2bb6-d198-4b61-a931-1c67aa559887"
                                                 },
                                                 "type": "SetVariable",
                                                 "inputs": {
@@ -829,12 +878,18 @@
                                           "actions": {}
                                         },
                                         "expression": "@outputs('Get_manager_(V2)')['statusCode']",
+                                        "metadata": {
+                                          "operationMetadataId": "95cbc44c-2d23-4a48-87d9-981ba3590e36"
+                                        },
                                         "type": "Switch"
                                       },
                                       "if_account_disabled_and_that_means_orphan_set_it_as_orphan": {
                                         "actions": {
                                           "Set_isOrphan_var_true_-_disabled_user": {
                                             "runAfter": {},
+                                            "metadata": {
+                                              "operationMetadataId": "8fab47da-3656-4b2e-8980-abcfa7226f86"
+                                            },
                                             "type": "SetVariable",
                                             "inputs": {
                                               "name": "isOrphan",
@@ -847,6 +902,9 @@
                                           "actions": {
                                             "Set_isOrphan_var_false_-_disabled_user": {
                                               "runAfter": {},
+                                              "metadata": {
+                                                "operationMetadataId": "8e7b7612-096c-4d2f-a323-b0386dafdb0c"
+                                              },
                                               "type": "SetVariable",
                                               "inputs": {
                                                 "name": "isOrphan",
@@ -871,6 +929,9 @@
                                             }
                                           ]
                                         },
+                                        "metadata": {
+                                          "operationMetadataId": "6cbb153d-44e9-4999-a025-87f7c6f09b39"
+                                        },
                                         "type": "If"
                                       },
                                       "Find_Maker": {
@@ -878,6 +939,9 @@
                                           "if_account_disabled_and_that_means_orphan_set_it_as_orphan": [
                                             "Succeeded"
                                           ]
+                                        },
+                                        "metadata": {
+                                          "operationMetadataId": "e0728267-bff1-41a5-a2a4-cfdf7f940fd3"
                                         },
                                         "type": "OpenApiConnection",
                                         "inputs": {
@@ -903,6 +967,9 @@
                                             "Succeeded"
                                           ]
                                         },
+                                        "metadata": {
+                                          "operationMetadataId": "ae85fe09-77f9-4357-8913-af064fb3ba70"
+                                        },
                                         "type": "SetVariable",
                                         "inputs": {
                                           "name": "varMakerArray",
@@ -916,6 +983,7 @@
                                             "Department": "@outputs('Get_user_profile_(V2)')?['body/department']",
                                             "DisplayName": "@outputs('Get_user_profile_(V2)')?['body/displayName']",
                                             "City": "@outputs('Get_user_profile_(V2)')?['body/city']",
+                                            "State": "@outputs('Get_user_profile_(V2)')?['body/state']",
                                             "Country": "@outputs('Get_user_profile_(V2)')?['body/country']",
                                             "preferredLanguage": "@if(equals(outputs('Get_user_profile_(V2)')?['body/preferredLanguage'], null), 'en-US', outputs('Get_user_profile_(V2)')?['body/preferredLanguage'])",
                                             "Email": "@outputs('Get_user_profile_(V2)')?['body/mail']",
@@ -934,6 +1002,9 @@
                                     "actions": {
                                       "Look_up_in_AD_for_Service_Principles_New_App": {
                                         "runAfter": {},
+                                        "metadata": {
+                                          "operationMetadataId": "34d9c5c0-157b-473b-922d-985e884479ab"
+                                        },
                                         "type": "OpenApiConnection",
                                         "inputs": {
                                           "host": {
@@ -964,6 +1035,9 @@
                                             "actions": {
                                               "Find_Service_Principle": {
                                                 "runAfter": {},
+                                                "metadata": {
+                                                  "operationMetadataId": "628b2fd7-c378-427b-9218-7b6866930567"
+                                                },
                                                 "type": "OpenApiConnection",
                                                 "inputs": {
                                                   "host": {
@@ -986,6 +1060,9 @@
                                                 "actions": {
                                                   "Update_Service_Principle": {
                                                     "runAfter": {},
+                                                    "metadata": {
+                                                      "operationMetadataId": "34a300cc-335c-4288-a719-118d3889f6c1"
+                                                    },
                                                     "type": "OpenApiConnection",
                                                     "inputs": {
                                                       "host": {
@@ -1002,7 +1079,10 @@
                                                         "item/admin_recordguidasstring": "@triggerBody()['text']",
                                                         "item/admin_userisserviceprinciple": true
                                                       },
-                                                      "authentication": "@parameters('$authentication')"
+                                                      "authentication": {
+                                                        "type": "Raw",
+                                                        "value": "@json(decodeBase64(triggerOutputs().headers['X-MS-APIM-Tokens']))['$ConnectionKey']"
+                                                      }
                                                     }
                                                   }
                                                 },
@@ -1015,6 +1095,9 @@
                                                   "actions": {
                                                     "Add_Service_Principle": {
                                                       "runAfter": {},
+                                                      "metadata": {
+                                                        "operationMetadataId": "0fa96a59-2386-40e5-b7ac-9c3254655bff"
+                                                      },
                                                       "type": "OpenApiConnection",
                                                       "inputs": {
                                                         "host": {
@@ -1031,7 +1114,10 @@
                                                           "item/admin_recordguidasstring": "@triggerBody()['text']",
                                                           "item/admin_userisserviceprinciple": true
                                                         },
-                                                        "authentication": "@parameters('$authentication')"
+                                                        "authentication": {
+                                                          "type": "Raw",
+                                                          "value": "@json(decodeBase64(triggerOutputs().headers['X-MS-APIM-Tokens']))['$ConnectionKey']"
+                                                        }
                                                       }
                                                     }
                                                   }
@@ -1042,6 +1128,9 @@
                                                     0
                                                   ]
                                                 },
+                                                "metadata": {
+                                                  "operationMetadataId": "9dfe355d-cf60-4de5-a9cf-d09f6783ce9d"
+                                                },
                                                 "type": "If"
                                               },
                                               "Compose_isServicePrinciple": {
@@ -1049,6 +1138,9 @@
                                                   "Update_or_Insert_Service_Principle": [
                                                     "Succeeded"
                                                   ]
+                                                },
+                                                "metadata": {
+                                                  "operationMetadataId": "7676e134-5bff-421f-a70b-5b85fc93bea0"
                                                 },
                                                 "type": "Compose",
                                                 "inputs": "@setProperty(variables('varMakerArray'),'isServicePrinciple',true)"
@@ -1058,6 +1150,9 @@
                                                   "Compose_isServicePrinciple": [
                                                     "Succeeded"
                                                   ]
+                                                },
+                                                "metadata": {
+                                                  "operationMetadataId": "abfdf2d3-3ce8-4f87-a5bd-af146f45c4e3"
                                                 },
                                                 "type": "SetVariable",
                                                 "inputs": {
@@ -1074,6 +1169,9 @@
                                               "actions": {
                                                 "orphan_found": {
                                                   "runAfter": {},
+                                                  "metadata": {
+                                                    "operationMetadataId": "7ecaffa8-ecbd-45b8-85c6-74a46c9dd067"
+                                                  },
                                                   "type": "Compose",
                                                   "inputs": "@setProperty(variables('varMakerArray'),'isOrphan',true)"
                                                 },
@@ -1082,6 +1180,9 @@
                                                     "orphan_found": [
                                                       "Succeeded"
                                                     ]
+                                                  },
+                                                  "metadata": {
+                                                    "operationMetadataId": "b724a596-bb1b-4e1c-a06e-e05617d288b5"
                                                   },
                                                   "type": "SetVariable",
                                                   "inputs": {
@@ -1097,6 +1198,9 @@
                                                     "actions": {
                                                       "another_system_found": {
                                                         "runAfter": {},
+                                                        "metadata": {
+                                                          "operationMetadataId": "4497ffa3-8cda-486d-96bd-141f04ae7c44"
+                                                        },
                                                         "type": "Compose",
                                                         "inputs": "@setProperty(variables('varMakerArray'),'isSystem',true)"
                                                       },
@@ -1105,6 +1209,9 @@
                                                           "another_system_found": [
                                                             "Succeeded"
                                                           ]
+                                                        },
+                                                        "metadata": {
+                                                          "operationMetadataId": "191f563b-74ba-4d60-9470-ac29722133ed"
                                                         },
                                                         "type": "SetVariable",
                                                         "inputs": {
@@ -1118,6 +1225,9 @@
                                                       "actions": {
                                                         "another_orphan_found": {
                                                           "runAfter": {},
+                                                          "metadata": {
+                                                            "operationMetadataId": "a69e08ba-5d52-47e9-9aff-0c9a4e78d8ee"
+                                                          },
                                                           "type": "Compose",
                                                           "inputs": "@setProperty(variables('varMakerArray'),'isOrphan',true)"
                                                         },
@@ -1126,6 +1236,9 @@
                                                             "another_orphan_found": [
                                                               "Succeeded"
                                                             ]
+                                                          },
+                                                          "metadata": {
+                                                            "operationMetadataId": "c3177cdb-86f2-4ccb-b087-e2272cf78dee"
                                                           },
                                                           "type": "SetVariable",
                                                           "inputs": {
@@ -1137,9 +1250,12 @@
                                                     },
                                                     "expression": {
                                                       "equals": [
-                                                        "@triggerBody()?['text_1']",
+                                                        "@triggerBody()['text']",
                                                         "SYSTEM"
                                                       ]
+                                                    },
+                                                    "metadata": {
+                                                      "operationMetadataId": "58522b58-53e5-46eb-a8c5-1d8c560b0b39"
                                                     },
                                                     "type": "If"
                                                   }
@@ -1149,29 +1265,35 @@
                                                 "or": [
                                                   {
                                                     "equals": [
-                                                      "@triggerBody()?['text_1']",
+                                                      "@triggerBody()['text']",
                                                       "@null"
                                                     ]
                                                   },
                                                   {
                                                     "equals": [
-                                                      "@length(triggerBody()?['text_1'])",
+                                                      "@length(triggerBody()?['text'])",
                                                       0
                                                     ]
                                                   },
                                                   {
                                                     "equals": [
-                                                      "@equals(triggerBody()?['text_1'], '')",
+                                                      "@equals(triggerBody()?['text'], '')",
                                                       "@true"
                                                     ]
                                                   }
                                                 ]
+                                              },
+                                              "metadata": {
+                                                "operationMetadataId": "2991c54a-585f-45c6-9de8-34cbf4a97347"
                                               },
                                               "type": "If"
                                             }
                                           }
                                         },
                                         "expression": "@outputs('Look_up_in_AD_for_Service_Principles_New_App')['statusCode']",
+                                        "metadata": {
+                                          "operationMetadataId": "936a0e6c-a2fc-4640-bf61-1285495a12b4"
+                                        },
                                         "type": "Switch"
                                       }
                                     }
@@ -1200,7 +1322,7 @@
                                   },
                                   "parameters": {
                                     "id": "@triggerBody()['text']",
-                                    "$select": "city,country,department,jobTitle,officeLocation,statusCode,userPrincipalName, displayName, id, companyName, preferredLanguage, mail, accountenabled"
+                                    "$select": "city,country,department,jobTitle,officeLocation,statusCode,userPrincipalName, displayName, id, companyName, preferredLanguage, mail, accountenabled, state"
                                   },
                                   "authentication": {
                                     "type": "Raw",
@@ -1220,7 +1342,7 @@
                               },
                               {
                                 "equals": [
-                                  "@triggerBody()?['boolean']",
+                                  "@triggerBody()['boolean']",
                                   "@false"
                                 ]
                               }
@@ -1245,7 +1367,7 @@
                             },
                             "parameters": {
                               "entityName": "admin_makers",
-                              "$select": "admin_makerisorphaned, admin_userisserviceprinciple, admin_useremail, admin_company, admin_department, admin_displayname, admin_city, admin_country, admin_preferredlanguage, admin_makerid, admin_userprincipalname, admin_managerid, admin_accountenabled, admin_managerdisplayname",
+                              "$select": "admin_makerisorphaned, admin_userisserviceprinciple, admin_useremail, admin_company, admin_department, admin_displayname, admin_city, admin_stateorprovince, admin_country, admin_preferredlanguage, admin_makerid, admin_userprincipalname, admin_managerid, admin_accountenabled, admin_managerdisplayname",
                               "$filter": "admin_makerid eq @{triggerBody()['text']} and modifiedon gt @{addDays(utcNow(), -1)}"
                             },
                             "authentication": {
@@ -1286,19 +1408,9 @@
                 }
               },
               "expression": {
-                "or": [
-                  {
-                    "equals": [
-                      "@triggerBody()['text']",
-                      "SYSTEM"
-                    ]
-                  },
-                  {
-                    "equals": [
-                      "@length(triggerBody()?['text'])",
-                      0
-                    ]
-                  }
+                "equals": [
+                  "@triggerBody()['text']",
+                  "SYSTEM"
                 ]
               },
               "metadata": {
@@ -1334,7 +1446,8 @@
                   "usermanagerid": "@{body('Parse_JSON')?['ManagerID']}",
                   "usermanagername": "@{body('Parse_JSON')?['ManagerName']}",
                   "userisenabled": "@body('Parse_JSON')?['isEnabled']",
-                  "userupn": "@{body('Parse_JSON')?['UPN']}"
+                  "userupn": "@{body('Parse_JSON')?['UPN']}",
+                  "userstate": "@{body('Parse_JSON')?['State']}"
                 },
                 "schema": {
                   "type": "object",
@@ -1413,6 +1526,11 @@
                       "title": "userUPN",
                       "x-ms-dynamically-added": true,
                       "type": "string"
+                    },
+                    "userstate": {
+                      "title": "userState",
+                      "x-ms-dynamically-added": true,
+                      "type": "string"
                     }
                   }
                 }
@@ -1467,6 +1585,12 @@
                       ]
                     },
                     "City": {
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "State": {
                       "type": [
                         "string",
                         "null"
@@ -1548,12 +1672,15 @@
                   "item/admin_name": "@workflow()?['tags']['flowDisplayName']",
                   "item/admin_flowinstanceurl": "@concat(parameters('Power Automate Environment Variable (admin_PowerAutomateEnvironmentVariable)'), workflow()?['tags']['environmentName'], '/flows/', workflow()?['name'], '/runs/', workflow()?['run']['name'])"
                 },
+                "authentication": {
+                  "type": "Raw",
+                  "value": "@json(decodeBase64(triggerOutputs().headers['X-MS-APIM-Tokens']))['$ConnectionKey']"
+                },
                 "retryPolicy": {
                   "type": "exponential",
                   "count": 10,
                   "interval": "PT10S"
-                },
-                "authentication": "@parameters('$authentication')"
+                }
               }
             },
             "Terminate_2": {
@@ -1624,7 +1751,10 @@
                   "item/admin_lastrun": "@utcNow()",
                   "item/admin_lastrunpassed": false
                 },
-                "authentication": "@parameters('$authentication')"
+                "authentication": {
+                  "type": "Raw",
+                  "value": "@json(decodeBase64(triggerOutputs().headers['X-MS-APIM-Tokens']))['$ConnectionKey']"
+                }
               }
             }
           },
@@ -1662,7 +1792,10 @@
                   "item/admin_lastrun": "@utcNow()",
                   "item/admin_lastrunpassed": true
                 },
-                "authentication": "@parameters('$authentication')"
+                "authentication": {
+                  "type": "Raw",
+                  "value": "@json(decodeBase64(triggerOutputs().headers['X-MS-APIM-Tokens']))['$ConnectionKey']"
+                }
               }
             },
             "Get_ID_Pass": {
@@ -1735,8 +1868,9 @@
                   "ID": "@triggerBody()['text']",
                   "Company": "",
                   "Department": "",
-                  "DisplayName": "@coalesce(triggerBody()?['text_1'], '')",
+                  "DisplayName": "",
                   "City": "",
+                  "State": "",
                   "Country": "",
                   "preferredLanguage": "en-US",
                   "Email": "",

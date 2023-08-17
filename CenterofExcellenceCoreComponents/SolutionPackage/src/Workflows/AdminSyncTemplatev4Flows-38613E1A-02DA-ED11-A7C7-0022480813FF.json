@@ -50,7 +50,7 @@
           }
         },
         "FullInventory (admin_FullInventory)": {
-          "defaultValue": false,
+          "defaultValue": true,
           "type": "Bool",
           "metadata": {
             "schemaName": "admin_FullInventory",
@@ -380,7 +380,12 @@
                       "environmentName": "@triggerOutputs()?['body/admin_environmentname']",
                       "expandSuspensionInfo": true
                     },
-                    "authentication": "@parameters('$authentication')"
+                    "authentication": "@parameters('$authentication')",
+                    "retryPolicy": {
+                      "type": "exponential",
+                      "count": 30,
+                      "interval": "PT30S"
+                    }
                   },
                   "runtimeConfiguration": {
                     "paginationPolicy": {
@@ -390,7 +395,7 @@
                 },
                 "CurrentFlowInventory": {
                   "runAfter": {
-                    "List_Flows_as_Admin_(V2)": [
+                    "Filter_out_unpublished_flows": [
                       "Succeeded"
                     ]
                   },
@@ -415,6 +420,21 @@
                     "paginationPolicy": {
                       "minimumItemCount": 100000
                     }
+                  }
+                },
+                "Filter_out_unpublished_flows": {
+                  "runAfter": {
+                    "List_Flows_as_Admin_(V2)": [
+                      "Succeeded"
+                    ]
+                  },
+                  "metadata": {
+                    "operationMetadataId": "d8c06d7d-7642-4332-81ba-f5d7bbe636d1"
+                  },
+                  "type": "Query",
+                  "inputs": {
+                    "from": "@outputs('List_Flows_as_Admin_(V2)')?['body/value']",
+                    "where": "@not(equals(equals(item()?['name'], item()?['properties/workflowEntityId']), true))"
                   }
                 }
               },
@@ -491,7 +511,7 @@
                                   },
                                   "type": "Select",
                                   "inputs": {
-                                    "from": "@outputs('List_Flows_as_Admin_(V2)')?['body/value']",
+                                    "from": "@body('Filter_out_unpublished_flows')",
                                     "select": {
                                       "FlowID": "@item()?['name']"
                                     }
@@ -701,7 +721,7 @@
                                     },
                                     "type": "Select",
                                     "inputs": {
-                                      "from": "@outputs('List_Flows_as_Admin_(V2)')?['body/value']",
+                                      "from": "@body('Filter_out_unpublished_flows')",
                                       "select": {
                                         "FlowID": "@item()?['name']",
                                         "FlowState": "@item()?['properties/state']"
@@ -825,7 +845,7 @@
                                 },
                                 "type": "Query",
                                 "inputs": {
-                                  "from": "@outputs('List_Flows_as_Admin_(V2)')?['body/value']",
+                                  "from": "@body('Filter_out_unpublished_flows')",
                                   "where": "@or(equals(item()?['properties/lastModifiedTime'], null), greater(item()?['properties/lastModifiedTime'], body('Get_past_time')))"
                                 }
                               },
@@ -1046,7 +1066,7 @@
                       },
                       "type": "Query",
                       "inputs": {
-                        "from": "@outputs('List_Flows_as_Admin_(V2)')?['body/value']",
+                        "from": "@body('Filter_out_unpublished_flows')",
                         "where": "@contains(item()?['properties'], 'estimatedSuspensionData')"
                       }
                     },

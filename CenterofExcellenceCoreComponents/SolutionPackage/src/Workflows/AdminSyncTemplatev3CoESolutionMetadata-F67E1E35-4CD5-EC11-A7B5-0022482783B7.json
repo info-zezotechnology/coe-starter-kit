@@ -139,14 +139,14 @@
                                       "item/admin_helplink": "@items('Apply_to_each_-_App')['HelpLink']",
                                       "item/admin_installorder": "@items('Apply_to_each_-_App')['InstallOrder']",
                                       "item/admin_objectguid": "@if(equals(length(body('Filter_array_-_Apps')), 0), '',  first(body('Filter_array_-_Apps'))?['GUID'])",
-                                      "item/admin_objectismanaged": "@if(equals(items('Apply_to_each_-_App')['CoESolution'], 'Core'),  outputs('CoreIsManaged'), if(equals(items('Apply_to_each_-_App')['CoESolution'], 'Audit Logs'),  outputs('AuditLogsIsManaged'), if(equals(items('Apply_to_each_-_App')['CoESolution'], 'Governance'),  outputs('GovernanceIsManaged'), if(equals(items('Apply_to_each_-_App')['CoESolution'], 'Innovation Backlog'),  outputs('InnovationBacklogIsManaged'), if(equals(items('Apply_to_each_-_App')['CoESolution'], 'Nurture'),  outputs('NurtureIsManaged'), if(equals(items('Apply_to_each_-_App')['CoESolution'], 'test soln'),  outputs('TestIsManaged'), true))))))",
+                                      "item/admin_objectismanaged": "@if(equals(items('Apply_to_each_-_App')['CoESolution'], 'Core'),  outputs('CoreIsManaged'), if(equals(items('Apply_to_each_-_App')['CoESolution'], 'Governance'),  outputs('GovernanceIsManaged'), if(equals(items('Apply_to_each_-_App')['CoESolution'], 'Innovation Backlog'),  outputs('InnovationBacklogIsManaged'), if(equals(items('Apply_to_each_-_App')['CoESolution'], 'Nurture'),  outputs('NurtureIsManaged'), if(equals(items('Apply_to_each_-_App')['CoESolution'], 'test soln'),  outputs('TestIsManaged'), true)))))",
                                       "item/admin_objectmakerurl": "@if(equals(length(body('Filter_array_-_Apps')), 0), '',  first(body('Filter_array_-_Apps'))?['MakerURL'])",
                                       "item/admin_objecttype": "@items('Apply_to_each_-_App')['ObjectType']",
                                       "item/admin_objecturl": "@if(equals(length(body('Filter_array_-_Apps')), 0), '',  first(body('Filter_array_-_Apps'))?['PlayerURL'])",
                                       "item/admin_persona": "@items('Apply_to_each_-_App')['Persona']",
                                       "item/admin_rerunonupgrade": false,
                                       "item/admin_shipon": "@items('Apply_to_each_-_App')['ShipOn']",
-                                      "item/admin_solutionid": "@if(equals(items('Apply_to_each_-_App')['CoESolution'], 'Core'),  outputs('CoreID'), if(equals(items('Apply_to_each_-_App')['CoESolution'], 'Audit Logs'),  outputs('AuditLogsID'), if(equals(items('Apply_to_each_-_App')['CoESolution'], 'Governance'),  outputs('GovernanceID'), if(equals(items('Apply_to_each_-_App')['CoESolution'], 'Innovation Backlog'),  outputs('InnovationBacklogID'), if(equals(items('Apply_to_each_-_App')['CoESolution'], 'Nurture'),  outputs('NurtureID'), if(equals(items('Apply_to_each_-_App')['CoESolution'], 'test soln'),  outputs('TestID'), 'error'))))))",
+                                      "item/admin_solutionid": "@if(equals(items('Apply_to_each_-_App')['CoESolution'], 'Core'),  outputs('CoreID'), if(equals(items('Apply_to_each_-_App')['CoESolution'], 'Governance'),  outputs('GovernanceID'), if(equals(items('Apply_to_each_-_App')['CoESolution'], 'Innovation Backlog'),  outputs('InnovationBacklogID'), if(equals(items('Apply_to_each_-_App')['CoESolution'], 'Nurture'),  outputs('NurtureID'), if(equals(items('Apply_to_each_-_App')['CoESolution'], 'test soln'),  outputs('TestID'), 'error')))))",
                                       "item/admin_usedforbyodlcoe": true,
                                       "item/admin_usedforsyncflowcoe": true
                                     },
@@ -183,14 +183,14 @@
                                         "item/admin_helplink": "@items('Apply_to_each_-_App')['HelpLink']",
                                         "item/admin_installorder": "@items('Apply_to_each_-_App')['InstallOrder']",
                                         "item/admin_objectguid": "@if(equals(length(body('Filter_array_-_Apps')), 0), '',  first(body('Filter_array_-_Apps'))?['GUID'])",
-                                        "item/admin_objectismanaged": "@if(equals(items('Apply_to_each_-_App')['CoESolution'], 'Core'),  outputs('CoreIsManaged'), if(equals(items('Apply_to_each_-_App')['CoESolution'], 'Audit Logs'),  outputs('AuditLogsIsManaged'), if(equals(items('Apply_to_each_-_App')['CoESolution'], 'Governance'),  outputs('GovernanceIsManaged'), if(equals(items('Apply_to_each_-_App')['CoESolution'], 'Innovation Backlog'),  outputs('InnovationBacklogIsManaged'), if(equals(items('Apply_to_each_-_App')['CoESolution'], 'Nurture'),  outputs('NurtureIsManaged'), if(equals(items('Apply_to_each_-_App')['CoESolution'], 'test soln'),  outputs('TestIsManaged'), true))))))",
+                                        "item/admin_objectismanaged": "@if(equals(items('Apply_to_each_-_App')['CoESolution'], 'Core'),  outputs('CoreIsManaged'), if(equals(items('Apply_to_each_-_App')['CoESolution'], 'Governance'),  outputs('GovernanceIsManaged'), if(equals(items('Apply_to_each_-_App')['CoESolution'], 'Innovation Backlog'),  outputs('InnovationBacklogIsManaged'), if(equals(items('Apply_to_each_-_App')['CoESolution'], 'Nurture'),  outputs('NurtureIsManaged'), if(equals(items('Apply_to_each_-_App')['CoESolution'], 'test soln'),  outputs('TestIsManaged'), true)))))",
                                         "item/admin_objectmakerurl": "@if(equals(length(body('Filter_array_-_Apps')), 0), '',  first(body('Filter_array_-_Apps'))?['MakerURL'])",
                                         "item/admin_objecttype": "@items('Apply_to_each_-_App')['ObjectType']",
                                         "item/admin_objecturl": "@if(equals(length(body('Filter_array_-_Apps')), 0), '',  first(body('Filter_array_-_Apps'))?['PlayerURL'])",
                                         "item/admin_persona": "@items('Apply_to_each_-_App')['Persona']",
                                         "item/admin_rerunonupgrade": false,
                                         "item/admin_shipon": "@items('Apply_to_each_-_App')['ShipOn']",
-                                        "item/admin_solutionid": "@if(equals(items('Apply_to_each_-_App')['CoESolution'], 'Core'),  outputs('CoreID'), if(equals(items('Apply_to_each_-_App')['CoESolution'], 'Audit Logs'),  outputs('AuditLogsID'), if(equals(items('Apply_to_each_-_App')['CoESolution'], 'Governance'),  outputs('GovernanceID'), if(equals(items('Apply_to_each_-_App')['CoESolution'], 'Innovation Backlog'),  outputs('InnovationBacklogID'), if(equals(items('Apply_to_each_-_App')['CoESolution'], 'Nurture'),  outputs('NurtureID'), if(equals(items('Apply_to_each_-_App')['CoESolution'], 'test soln'),  outputs('TestID'), 'error'))))))",
+                                        "item/admin_solutionid": "@if(equals(items('Apply_to_each_-_App')['CoESolution'], 'Core'),  outputs('CoreID'), if(equals(items('Apply_to_each_-_App')['CoESolution'], 'Governance'),  outputs('GovernanceID'), if(equals(items('Apply_to_each_-_App')['CoESolution'], 'Innovation Backlog'),  outputs('InnovationBacklogID'), if(equals(items('Apply_to_each_-_App')['CoESolution'], 'Nurture'),  outputs('NurtureID'), if(equals(items('Apply_to_each_-_App')['CoESolution'], 'test soln'),  outputs('TestID'), 'error')))))\r\n",
                                         "item/admin_usedforbyodlcoe": true,
                                         "item/admin_usedforsyncflowcoe": true
                                       },
@@ -288,14 +288,13 @@
                                         "item/admin_helplink": "@items('Apply_to_each_-_App')['HelpLink']",
                                         "item/admin_installorder": "@items('Apply_to_each_-_App')['InstallOrder']",
                                         "item/admin_objectguid": "@if(equals(length(body('Filter_array_-_Model_Driven_Apps')), 0), '',  first(body('Filter_array_-_Model_Driven_Apps'))?['ProductGUID'])",
-                                        "item/admin_objectismanaged": "@if(equals(items('Apply_to_each_-_App')['CoESolution'], 'Core'),  outputs('CoreIsManaged'), if(equals(items('Apply_to_each_-_App')['CoESolution'], 'Audit Logs'),  outputs('AuditLogsIsManaged'), if(equals(items('Apply_to_each_-_App')['CoESolution'], 'Governance'),  outputs('GovernanceIsManaged'), if(equals(items('Apply_to_each_-_App')['CoESolution'], 'Innovation Backlog'),  outputs('InnovationBacklogIsManaged'), if(equals(items('Apply_to_each_-_App')['CoESolution'], 'Nurture'),  outputs('NurtureIsManaged'), if(equals(items('Apply_to_each_-_App')['CoESolution'], 'test soln'),  outputs('TestIsManaged'), true))))))",
+                                        "item/admin_objectismanaged": "@if(equals(items('Apply_to_each_-_App')['CoESolution'], 'Core'),  outputs('CoreIsManaged'), if(equals(items('Apply_to_each_-_App')['CoESolution'], 'Governance'),  outputs('GovernanceIsManaged'), if(equals(items('Apply_to_each_-_App')['CoESolution'], 'Innovation Backlog'),  outputs('InnovationBacklogIsManaged'), if(equals(items('Apply_to_each_-_App')['CoESolution'], 'Nurture'),  outputs('NurtureIsManaged'), if(equals(items('Apply_to_each_-_App')['CoESolution'], 'test soln'),  outputs('TestIsManaged'), true)))))",
                                         "item/admin_objectmakerurl": "@if(equals(length(body('Filter_array_-_Model_Driven_Apps')), 0), '',  first(body('Filter_array_-_Model_Driven_Apps'))?['MakerURL'])",
                                         "item/admin_objecttype": "@items('Apply_to_each_-_App')['ObjectType']",
                                         "item/admin_objecturl": "@if(equals(length(body('Filter_array_-_Model_Driven_Apps')), 0), '',  first(body('Filter_array_-_Model_Driven_Apps'))?['PlayerURL'])",
-                                        "item/admin_persona": "@items('Apply_to_each_-_App')['Persona']",
                                         "item/admin_rerunonupgrade": false,
                                         "item/admin_shipon": "@items('Apply_to_each_-_App')['ShipOn']",
-                                        "item/admin_solutionid": "@if(equals(items('Apply_to_each_-_App')['CoESolution'], 'Core'),  outputs('CoreID'), if(equals(items('Apply_to_each_-_App')['CoESolution'], 'Audit Logs'),  outputs('AuditLogsID'), if(equals(items('Apply_to_each_-_App')['CoESolution'], 'Governance'),  outputs('GovernanceID'), if(equals(items('Apply_to_each_-_App')['CoESolution'], 'Innovation Backlog'),  outputs('InnovationBacklogID'), if(equals(items('Apply_to_each_-_App')['CoESolution'], 'Nurture'),  outputs('NurtureID'), if(equals(items('Apply_to_each_-_App')['CoESolution'], 'test soln'),  outputs('TestID'), 'error'))))))",
+                                        "item/admin_solutionid": "@if(equals(items('Apply_to_each_-_App')['CoESolution'], 'Core'),  outputs('CoreID'), if(equals(items('Apply_to_each_-_App')['CoESolution'], 'Governance'),  outputs('GovernanceID'), if(equals(items('Apply_to_each_-_App')['CoESolution'], 'Innovation Backlog'),  outputs('InnovationBacklogID'), if(equals(items('Apply_to_each_-_App')['CoESolution'], 'Nurture'),  outputs('NurtureID'), if(equals(items('Apply_to_each_-_App')['CoESolution'], 'test soln'),  outputs('TestID'), 'error')))))",
                                         "item/admin_usedforbyodlcoe": true,
                                         "item/admin_usedforsyncflowcoe": true
                                       },
@@ -332,14 +331,14 @@
                                           "item/admin_helplink": "@items('Apply_to_each_-_App')['HelpLink']",
                                           "item/admin_installorder": "@items('Apply_to_each_-_App')['InstallOrder']",
                                           "item/admin_objectguid": "@if(equals(length(body('Filter_array_-_Model_Driven_Apps')), 0), '',  first(body('Filter_array_-_Model_Driven_Apps'))?['ProductGUID'])",
-                                          "item/admin_objectismanaged": "@if(equals(items('Apply_to_each_-_App')['CoESolution'], 'Core'),  outputs('CoreIsManaged'), if(equals(items('Apply_to_each_-_App')['CoESolution'], 'Audit Logs'),  outputs('AuditLogsIsManaged'), if(equals(items('Apply_to_each_-_App')['CoESolution'], 'Governance'),  outputs('GovernanceIsManaged'), if(equals(items('Apply_to_each_-_App')['CoESolution'], 'Innovation Backlog'),  outputs('InnovationBacklogIsManaged'), if(equals(items('Apply_to_each_-_App')['CoESolution'], 'Nurture'),  outputs('NurtureIsManaged'), if(equals(items('Apply_to_each_-_App')['CoESolution'], 'test soln'),  outputs('TestIsManaged'), true))))))",
+                                          "item/admin_objectismanaged": "@if(equals(items('Apply_to_each_-_App')['CoESolution'], 'Core'),  outputs('CoreIsManaged'), if(equals(items('Apply_to_each_-_App')['CoESolution'], 'Governance'),  outputs('GovernanceIsManaged'), if(equals(items('Apply_to_each_-_App')['CoESolution'], 'Innovation Backlog'),  outputs('InnovationBacklogIsManaged'), if(equals(items('Apply_to_each_-_App')['CoESolution'], 'Nurture'),  outputs('NurtureIsManaged'), if(equals(items('Apply_to_each_-_App')['CoESolution'], 'test soln'),  outputs('TestIsManaged'), true)))))",
                                           "item/admin_objectmakerurl": "@if(equals(length(body('Filter_array_-_Model_Driven_Apps')), 0), '',  first(body('Filter_array_-_Model_Driven_Apps'))?['MakerURL'])",
                                           "item/admin_objecttype": "@items('Apply_to_each_-_App')['ObjectType']",
                                           "item/admin_objecturl": "@if(equals(length(body('Filter_array_-_Model_Driven_Apps')), 0), '',  first(body('Filter_array_-_Model_Driven_Apps'))?['PlayerURL'])",
                                           "item/admin_persona": "@items('Apply_to_each_-_App')['Persona']",
                                           "item/admin_rerunonupgrade": false,
                                           "item/admin_shipon": "@items('Apply_to_each_-_App')['ShipOn']",
-                                          "item/admin_solutionid": "@if(equals(items('Apply_to_each_-_App')['CoESolution'], 'Core'),  outputs('CoreID'), if(equals(items('Apply_to_each_-_App')['CoESolution'], 'Audit Logs'),  outputs('AuditLogsID'), if(equals(items('Apply_to_each_-_App')['CoESolution'], 'Governance'),  outputs('GovernanceID'), if(equals(items('Apply_to_each_-_App')['CoESolution'], 'Innovation Backlog'),  outputs('InnovationBacklogID'), if(equals(items('Apply_to_each_-_App')['CoESolution'], 'Nurture'),  outputs('NurtureID'), if(equals(items('Apply_to_each_-_App')['CoESolution'], 'test soln'),  outputs('TestID'), 'error'))))))",
+                                          "item/admin_solutionid": "@if(equals(items('Apply_to_each_-_App')['CoESolution'], 'Core'),  outputs('CoreID'), if(equals(items('Apply_to_each_-_App')['CoESolution'], 'Governance'),  outputs('GovernanceID'), if(equals(items('Apply_to_each_-_App')['CoESolution'], 'Innovation Backlog'),  outputs('InnovationBacklogID'), if(equals(items('Apply_to_each_-_App')['CoESolution'], 'Nurture'),  outputs('NurtureID'), if(equals(items('Apply_to_each_-_App')['CoESolution'], 'test soln'),  outputs('TestID'), 'error')))))",
                                           "item/admin_usedforbyodlcoe": true,
                                           "item/admin_usedforsyncflowcoe": true
                                         },
@@ -633,7 +632,7 @@
                         "ObjectType": "ModelDrivenApp",
                         "ShipOn": true,
                         "InstallOrder": 1,
-                        "Persona": "Admin"
+                        "Persona": "Maker"
                       },
                       {
                         "ObjectName": "CoE Setup and Upgrade Wizard",
@@ -670,6 +669,17 @@
                       },
                       {
                         "ObjectName": "Command Center CoE App Permissions",
+                        "CoESolution": "Core",
+                        "CoESolutionArea": "Inventory",
+                        "Flag": "",
+                        "HelpLink": "https://docs.microsoft.com/power-platform/guidance/coe/core-components#admin---command-center",
+                        "ObjectType": "CustomPage",
+                        "ShipOn": true,
+                        "InstallOrder": 1,
+                        "Persona": "Admin"
+                      },
+                      {
+                        "ObjectName": "Command Center CoE Dataflows page",
                         "CoESolution": "Core",
                         "CoESolutionArea": "Inventory",
                         "Flag": "",
@@ -743,7 +753,7 @@
                         "ObjectType": "CustomPage",
                         "ShipOn": true,
                         "InstallOrder": 1,
-                        "Persona": "Admin"
+                        "Persona": "Maker"
                       },
                       {
                         "ObjectName": "Command Center Message Center page",
@@ -790,6 +800,17 @@
                         "Persona": "Admin"
                       },
                       {
+                        "ObjectName": "DLP Impact Analysis",
+                        "CoESolution": "Core",
+                        "CoESolutionArea": "Inventory",
+                        "Flag": "",
+                        "HelpLink": "",
+                        "ObjectType": "CustomPage",
+                        "ShipOn": true,
+                        "InstallOrder": 1,
+                        "Persona": "Admin"
+                      },
+                      {
                         "ObjectName": "Environment Request Setup wizard page",
                         "CoESolution": "Core",
                         "CoESolutionArea": "Inventory",
@@ -812,6 +833,17 @@
                         "Persona": "Admin"
                       },
                       {
+                        "ObjectName": "DLP Impact Analysis [Preview]",
+                        "CoESolution": "Core",
+                        "CoESolutionArea": "Inventory",
+                        "Flag": "",
+                        "HelpLink": "https://docs.microsoft.com/power-platform/guidance/coe/core-components#dlp-editor-v2",
+                        "ObjectType": "ModelDrivenApp",
+                        "ShipOn": true,
+                        "InstallOrder": 1,
+                        "Persona": "Admin"
+                      },
+                      {
                         "ObjectName": "Initial Setup page",
                         "CoESolution": "Core",
                         "CoESolutionArea": "Inventory",
@@ -821,17 +853,6 @@
                         "ShipOn": true,
                         "InstallOrder": 1,
                         "Persona": "Admin"
-                      },
-                      {
-                        "ObjectName": "Maker - Environment Request",
-                        "CoESolution": "Core",
-                        "CoESolutionArea": "Environment Request",
-                        "Flag": "",
-                        "HelpLink": "https://docs.microsoft.com/power-platform/guidance/coe/env-mgmt",
-                        "ObjectType": "CanvasApp",
-                        "ShipOn": true,
-                        "InstallOrder": 1,
-                        "Persona": "Maker"
                       },
                       {
                         "ObjectName": "Maker Assessment setup wizard page",
@@ -856,23 +877,23 @@
                         "Persona": "Admin"
                       },
                       {
+                        "ObjectName": "Set App Permissions",
+                        "CoESolution": "Core",
+                        "CoESolutionArea": "Inventory",
+                        "Flag": "",
+                        "HelpLink": "https://docs.microsoft.com/power-platform/guidance/coe/core-components#set-app-permissions",
+                        "ObjectType": "CanvasApp",
+                        "ShipOn": true,
+                        "InstallOrder": 1,
+                        "Persona": "Admin"
+                      },
+                      {
                         "ObjectName": "Other Core Setup wizard page",
                         "CoESolution": "Core",
                         "CoESolutionArea": "Inventory",
                         "Flag": "",
                         "HelpLink": "https://learn.microsoft.com/power-platform/guidance/coe/setup-core-components#Set-up-the-Inventory-components-using-the-Setup-Wizard-[Preview]",
                         "ObjectType": "CustomPage",
-                        "ShipOn": true,
-                        "InstallOrder": 1,
-                        "Persona": "Admin"
-                      },
-                      {
-                        "ObjectName": "Power Platform Admin View",
-                        "CoESolution": "Core",
-                        "CoESolutionArea": "Inventory",
-                        "Flag": "",
-                        "HelpLink": "https://docs.microsoft.com/power-platform/guidance/coe/core-components#power-platform-admin-view",
-                        "ObjectType": "ModelDrivenApp",
                         "ShipOn": true,
                         "InstallOrder": 1,
                         "Persona": "Admin"
@@ -900,6 +921,17 @@
                         "Persona": "Admin"
                       },
                       {
+                        "ObjectName": "PPAdmin View Email Ai Builder Users",
+                        "CoESolution": "Core",
+                        "CoESolutionArea": "Inventory",
+                        "Flag": "",
+                        "HelpLink": "https://docs.microsoft.com/power-platform/guidance/coe/core-components#power-platform-admin-view",
+                        "ObjectType": "CustomPage",
+                        "ShipOn": true,
+                        "InstallOrder": 1,
+                        "Persona": "Admin"
+                      },
+                      {
                         "ObjectName": "PPAdmin View Email App Users",
                         "CoESolution": "Core",
                         "CoESolutionArea": "Inventory",
@@ -911,7 +943,128 @@
                         "Persona": "Admin"
                       },
                       {
+                        "ObjectName": "PPAdmin View Email Bot Users",
+                        "CoESolution": "Core",
+                        "CoESolutionArea": "Inventory",
+                        "Flag": "",
+                        "HelpLink": "https://docs.microsoft.com/power-platform/guidance/coe/core-components#power-platform-admin-view",
+                        "ObjectType": "CustomPage",
+                        "ShipOn": true,
+                        "InstallOrder": 1,
+                        "Persona": "Admin"
+                      },
+                      {
+                        "ObjectName": "PPAdmin View Email BPF Users",
+                        "CoESolution": "Core",
+                        "CoESolutionArea": "Inventory",
+                        "Flag": "",
+                        "HelpLink": "https://docs.microsoft.com/power-platform/guidance/coe/core-components#power-platform-admin-view",
+                        "ObjectType": "CustomPage",
+                        "ShipOn": true,
+                        "InstallOrder": 1,
+                        "Persona": "Admin"
+                      },
+                      {
+                        "ObjectName": "Power Platform Admin View",
+                        "CoESolution": "Core",
+                        "CoESolutionArea": "Inventory",
+                        "Flag": "",
+                        "HelpLink": "https://docs.microsoft.com/power-platform/guidance/coe/core-components#power-platform-admin-view",
+                        "ObjectType": "ModelDrivenApp",
+                        "ShipOn": true,
+                        "InstallOrder": 1,
+                        "Persona": "Admin"
+                      },
+                      {
+                        "ObjectName": "Set Flow Permissions",
+                        "CoESolution": "Core",
+                        "CoESolutionArea": "Inventory",
+                        "Flag": "",
+                        "HelpLink": "https://docs.microsoft.com/power-platform/guidance/coe/core-components#set-flow-permissions",
+                        "ObjectType": "CanvasApp",
+                        "ShipOn": true,
+                        "InstallOrder": 1,
+                        "Persona": "Admin"
+                      },
+                      {
+                        "ObjectName": "PPAdmin View Email Custom Connector Users",
+                        "CoESolution": "Core",
+                        "CoESolutionArea": "Inventory",
+                        "Flag": "",
+                        "HelpLink": "https://docs.microsoft.com/power-platform/guidance/coe/core-components#power-platform-admin-view",
+                        "ObjectType": "CustomPage",
+                        "ShipOn": true,
+                        "InstallOrder": 1,
+                        "Persona": "Admin"
+                      },
+                      {
+                        "ObjectName": "PPAdmin View Email Desktop Flow Users",
+                        "CoESolution": "Core",
+                        "CoESolutionArea": "Inventory",
+                        "Flag": "",
+                        "HelpLink": "https://docs.microsoft.com/power-platform/guidance/coe/core-components#power-platform-admin-view",
+                        "ObjectType": "CustomPage",
+                        "ShipOn": true,
+                        "InstallOrder": 1,
+                        "Persona": "Admin"
+                      },
+                      {
+                        "ObjectName": "PPAdmin View Email Environment Users",
+                        "CoESolution": "Core",
+                        "CoESolutionArea": "Inventory",
+                        "Flag": "",
+                        "HelpLink": "https://docs.microsoft.com/power-platform/guidance/coe/core-components#power-platform-admin-view",
+                        "ObjectType": "CustomPage",
+                        "ShipOn": true,
+                        "InstallOrder": 1,
+                        "Persona": "Admin"
+                      },
+                      {
                         "ObjectName": "PPAdmin View Email Flow Users",
+                        "CoESolution": "Core",
+                        "CoESolutionArea": "Inventory",
+                        "Flag": "",
+                        "HelpLink": "https://docs.microsoft.com/power-platform/guidance/coe/core-components#power-platform-admin-view",
+                        "ObjectType": "CustomPage",
+                        "ShipOn": true,
+                        "InstallOrder": 1,
+                        "Persona": "Admin"
+                      },
+                      {
+                        "ObjectName": "Maker - Environment Request",
+                        "CoESolution": "Core",
+                        "CoESolutionArea": "Environment Request",
+                        "Flag": "",
+                        "HelpLink": "https://docs.microsoft.com/power-platform/guidance/coe/env-mgmt",
+                        "ObjectType": "CanvasApp",
+                        "ShipOn": true,
+                        "InstallOrder": 1,
+                        "Persona": "Maker"
+                      },
+                      {
+                        "ObjectName": "PPAdmin View Email Makers",
+                        "CoESolution": "Core",
+                        "CoESolutionArea": "Inventory",
+                        "Flag": "",
+                        "HelpLink": "https://docs.microsoft.com/power-platform/guidance/coe/core-components#power-platform-admin-view",
+                        "ObjectType": "CustomPage",
+                        "ShipOn": true,
+                        "InstallOrder": 1,
+                        "Persona": "Admin"
+                      },
+                      {
+                        "ObjectName": "PPAdmin View Email Power Pages Users",
+                        "CoESolution": "Core",
+                        "CoESolutionArea": "Inventory",
+                        "Flag": "",
+                        "HelpLink": "https://docs.microsoft.com/power-platform/guidance/coe/core-components#power-platform-admin-view",
+                        "ObjectType": "CustomPage",
+                        "ShipOn": true,
+                        "InstallOrder": 1,
+                        "Persona": "Admin"
+                      },
+                      {
+                        "ObjectName": "PPAdmin View Email Solutions Users",
                         "CoESolution": "Core",
                         "CoESolutionArea": "Inventory",
                         "Flag": "",
@@ -944,7 +1097,7 @@
                         "Persona": "Admin"
                       },
                       {
-                        "ObjectName": "Pulse feedback setup wizard page",
+                        "ObjectName": "PPAdmin View Quarantine App",
                         "CoESolution": "Core",
                         "CoESolutionArea": "Inventory",
                         "Flag": "",
@@ -955,23 +1108,45 @@
                         "Persona": "Admin"
                       },
                       {
-                        "ObjectName": "Set App Permissions",
+                        "ObjectName": "PPAdmin View Start Flow",
                         "CoESolution": "Core",
                         "CoESolutionArea": "Inventory",
                         "Flag": "",
-                        "HelpLink": "https://docs.microsoft.com/power-platform/guidance/coe/core-components#set-app-permissions",
-                        "ObjectType": "CanvasApp",
+                        "HelpLink": "https://learn.microsoft.com/power-platform/guidance/coe/setup-core-components#Set-up-the-Inventory-components-using-the-Setup-Wizard-[Preview]",
+                        "ObjectType": "CustomPage",
                         "ShipOn": true,
                         "InstallOrder": 1,
                         "Persona": "Admin"
                       },
                       {
-                        "ObjectName": "Set Flow Permissions",
+                        "ObjectName": "PPAdmin View Stop Flow",
                         "CoESolution": "Core",
                         "CoESolutionArea": "Inventory",
                         "Flag": "",
-                        "HelpLink": "https://docs.microsoft.com/power-platform/guidance/coe/core-components#set-flow-permissions",
-                        "ObjectType": "CanvasApp",
+                        "HelpLink": "https://learn.microsoft.com/power-platform/guidance/coe/setup-core-components#Set-up-the-Inventory-components-using-the-Setup-Wizard-[Preview]",
+                        "ObjectType": "CustomPage",
+                        "ShipOn": true,
+                        "InstallOrder": 1,
+                        "Persona": "Admin"
+                      },
+                      {
+                        "ObjectName": "PPAdmin View UnQuarantine App",
+                        "CoESolution": "Core",
+                        "CoESolutionArea": "Inventory",
+                        "Flag": "",
+                        "HelpLink": "https://learn.microsoft.com/power-platform/guidance/coe/setup-core-components#Set-up-the-Inventory-components-using-the-Setup-Wizard-[Preview]",
+                        "ObjectType": "CustomPage",
+                        "ShipOn": true,
+                        "InstallOrder": 1,
+                        "Persona": "Admin"
+                      },
+                      {
+                        "ObjectName": "Pulse feedback setup wizard page",
+                        "CoESolution": "Core",
+                        "CoESolutionArea": "Inventory",
+                        "Flag": "",
+                        "HelpLink": "https://learn.microsoft.com/power-platform/guidance/coe/setup-core-components#Set-up-the-Inventory-components-using-the-Setup-Wizard-[Preview]",
+                        "ObjectType": "CustomPage",
                         "ShipOn": true,
                         "InstallOrder": 1,
                         "Persona": "Admin"
@@ -1019,72 +1194,13 @@
                         "ShipOn": true,
                         "InstallOrder": 1,
                         "Persona": "Admin"
-                      },
-                      {
-                        "ObjectName": "z[deprecated] Admin - Command Center",
-                        "CoESolution": "Core",
-                        "CoESolutionArea": "Inventory",
-                        "Flag": "",
-                        "HelpLink": "https://docs.microsoft.com/power-platform/guidance/coe/core-components#admin---command-center",
-                        "ObjectType": "CanvasApp",
-                        "ShipOn": true,
-                        "InstallOrder": 1,
-                        "Persona": "Admin"
-                      },
-                      {
-                        "ObjectName": "z[deprecated] App Catalog",
-                        "CoESolution": "Core",
-                        "CoESolutionArea": "Nurture",
-                        "Flag": "",
-                        "HelpLink": "https://docs.microsoft.com/power-platform/guidance/coe/core-components#app-catalog",
-                        "ObjectType": "CanvasApp",
-                        "ShipOn": true,
-                        "InstallOrder": 1,
-                        "Persona": "User"
-                      },
-                      {
-                        "ObjectName": "z[deprecated] Maker - Command Center",
-                        "CoESolution": "Core",
-                        "CoESolutionArea": "Nurture",
-                        "Flag": "",
-                        "HelpLink": "https://docs.microsoft.com/power-platform/guidance/coe/core-components#admin---command-center",
-                        "ObjectType": "CanvasApp",
-                        "ShipOn": true,
-                        "InstallOrder": 1,
-                        "Persona": "Maker"
-                      },
-                      {
-                        "ObjectName": "Command Center CoE Dataflows page",
-                        "CoESolution": "Core",
-                        "CoESolutionArea": "Inventory",
-                        "Flag": "",
-                        "HelpLink": "https://docs.microsoft.com/power-platform/guidance/coe/core-components#admin---command-center",
-                        "ObjectType": "CustomPage",
-                        "ShipOn": true,
-                        "InstallOrder": 1,
-                        "Persona": "Admin"
                       }
                     ]
                   }
                 },
-                "Audit_Logs_Apps": {
-                  "runAfter": {
-                    "Core_Apps": [
-                      "Succeeded"
-                    ]
-                  },
-                  "metadata": {
-                    "operationMetadataId": "424dffdd-0a5c-4526-b6d3-545dc0774b03"
-                  },
-                  "type": "SetVariable",
-                  "inputs": {
-                    "name": "AuditLogsObjects",
-                    "value": []
-                  }
-                },
                 "Governance_Apps": {
                   "runAfter": {
-                    "Audit_Logs_Apps": [
+                    "Core_Apps": [
                       "Succeeded"
                     ]
                   },
@@ -1113,17 +1229,6 @@
                         "Flag": "",
                         "HelpLink": "https://docs.microsoft.com/power-platform/guidance/coe/governance-components#cleanup-old-objects-app",
                         "ObjectType": "CanvasApp",
-                        "ShipOn": true,
-                        "InstallOrder": 1,
-                        "Persona": "Maker"
-                      },
-                      {
-                        "ObjectName": "Developer Compliance Center",
-                        "CoESolution": "Governance",
-                        "CoESolutionArea": "Compliance",
-                        "Flag": "",
-                        "HelpLink": "https://docs.microsoft.com/power-platform/guidance/coe/governance-components#developer-compliance-center",
-                        "ObjectType": "ModelDrivenApp",
                         "ShipOn": true,
                         "InstallOrder": 1,
                         "Persona": "Maker"
@@ -1217,12 +1322,12 @@
                         "Persona": ""
                       },
                       {
-                        "ObjectName": "z[deprecated] Developer Compliance Center",
+                        "ObjectName": "Developer Compliance Center",
                         "CoESolution": "Governance",
                         "CoESolutionArea": "Compliance",
                         "Flag": "",
                         "HelpLink": "https://docs.microsoft.com/power-platform/guidance/coe/governance-components#developer-compliance-center",
-                        "ObjectType": "CanvasApp",
+                        "ObjectType": "ModelDrivenApp",
                         "ShipOn": true,
                         "InstallOrder": 1,
                         "Persona": "Maker"
@@ -1379,61 +1484,6 @@
                         "ShipOn": true,
                         "InstallOrder": 1,
                         "Persona": "User"
-                      },
-                      {
-                        "ObjectName": "z[deprecated] Maker Assessment",
-                        "CoESolution": "Nurture",
-                        "CoESolutionArea": "Nurture",
-                        "Flag": "",
-                        "HelpLink": "https://docs.microsoft.com/power-platform/guidance/coe/nurture-components#maker-assessment",
-                        "ObjectType": "CanvasApp",
-                        "ShipOn": true,
-                        "InstallOrder": 1,
-                        "Persona": "Maker"
-                      },
-                      {
-                        "ObjectName": "z[deprecated] Maker Assessment Admin App",
-                        "CoESolution": "Nurture",
-                        "CoESolutionArea": "Nurture",
-                        "Flag": "",
-                        "HelpLink": "https://docs.microsoft.com/power-platform/guidance/coe/nurture-components#maker-assessment-admin-app",
-                        "ObjectType": "CanvasApp",
-                        "ShipOn": true,
-                        "InstallOrder": 1,
-                        "Persona": "Admin"
-                      },
-                      {
-                        "ObjectName": "z[deprecated] Power Platform Training Management",
-                        "CoESolution": "Nurture",
-                        "CoESolutionArea": "Nurture",
-                        "Flag": "",
-                        "HelpLink": "https://docs.microsoft.com/power-platform/guidance/coe/nurture-components#training-in-a-day--management",
-                        "ObjectType": "CanvasApp",
-                        "ShipOn": true,
-                        "InstallOrder": 1,
-                        "Persona": "Admin"
-                      },
-                      {
-                        "ObjectName": "z[deprecated] Power Platform Training Registration",
-                        "CoESolution": "Nurture",
-                        "CoESolutionArea": "Nurture",
-                        "Flag": "",
-                        "HelpLink": "https://docs.microsoft.com/power-platform/guidance/coe/nurture-components#training-in-a-day--registration",
-                        "ObjectType": "CanvasApp",
-                        "ShipOn": true,
-                        "InstallOrder": 1,
-                        "Persona": "User"
-                      },
-                      {
-                        "ObjectName": "z[deprecated] Template Catalog",
-                        "CoESolution": "Nurture",
-                        "CoESolutionArea": "Nurture",
-                        "Flag": "",
-                        "HelpLink": "https://docs.microsoft.com/power-platform/guidance/coe/nurture-components#template-catalog",
-                        "ObjectType": "CanvasApp",
-                        "ShipOn": true,
-                        "InstallOrder": 1,
-                        "Persona": "Maker"
                       }
                     ]
                   }
@@ -1497,7 +1547,7 @@
                     "operationMetadataId": "b9094186-9b03-49f0-a875-53840a33ef8c"
                   },
                   "type": "Compose",
-                  "inputs": "@union(variables('CoreObjects'), if(equals(outputs('hasAuditLogs'), true), variables('AuditLogsObjects'), variables('CoreObjects')), if(equals(outputs('hasGovernance'), true), variables('GovernanceObjects'), variables('CoreObjects')), if(equals(outputs('hasInnovationBacklog'), true), variables('InnovationBacklogObjects'), variables('CoreObjects')), if(equals(outputs('hasNurture'), true), variables('NurtureObjects'), variables('CoreObjects')), if(equals(outputs('hasTest'), true), variables('TestObjects'), variables('CoreObjects')))"
+                  "inputs": "@union(variables('CoreObjects'), if(equals(outputs('hasGovernance'), true), variables('GovernanceObjects'), variables('CoreObjects')), if(equals(outputs('hasInnovationBacklog'), true), variables('InnovationBacklogObjects'), variables('CoreObjects')), if(equals(outputs('hasNurture'), true), variables('NurtureObjects'), variables('CoreObjects')), if(equals(outputs('hasTest'), true), variables('TestObjects'), variables('CoreObjects')))"
                 }
               },
               "runAfter": {
@@ -2022,7 +2072,7 @@
                         }
                       },
                       "runAfter": {
-                        "SetupAuditLogs": [
+                        "SetupCore": [
                           "Succeeded"
                         ]
                       },
@@ -2170,66 +2220,6 @@
                         },
                         "authentication": "@parameters('$authentication')"
                       }
-                    },
-                    "SetupAuditLogs": {
-                      "actions": {
-                        "Filter_to_tenant_AuditLogs": {
-                          "runAfter": {},
-                          "metadata": {
-                            "operationMetadataId": "0be06f50-e30d-4372-a195-0754299f2024"
-                          },
-                          "type": "Query",
-                          "inputs": {
-                            "from": "@outputs('List_Envt_Solutions')?['body/value']",
-                            "where": "@equals(item()?['friendlyname'], 'Center of Excellence - Audit Logs')"
-                          }
-                        },
-                        "AuditLogsID": {
-                          "runAfter": {
-                            "Filter_to_tenant_AuditLogs": [
-                              "Succeeded"
-                            ]
-                          },
-                          "metadata": {
-                            "operationMetadataId": "dbc42129-6e84-4798-a1be-d9e94f992b15"
-                          },
-                          "type": "Compose",
-                          "inputs": "@first(body('Filter_to_tenant_AuditLogs'))?['solutionid']"
-                        },
-                        "AuditLogsIsManaged": {
-                          "runAfter": {
-                            "AuditLogsID": [
-                              "Succeeded"
-                            ]
-                          },
-                          "metadata": {
-                            "operationMetadataId": "0d352e81-3b62-4d9d-860b-dc7023eabbd0"
-                          },
-                          "type": "Compose",
-                          "inputs": "@first(body('Filter_to_tenant_AuditLogs'))?['ismanaged']"
-                        },
-                        "hasAuditLogs": {
-                          "runAfter": {
-                            "AuditLogsIsManaged": [
-                              "Succeeded"
-                            ]
-                          },
-                          "metadata": {
-                            "operationMetadataId": "30cd260d-7da5-4962-be05-6774c252ab24"
-                          },
-                          "type": "Compose",
-                          "inputs": "@if(equals(outputs('AuditLogsID'), null), false, true)"
-                        }
-                      },
-                      "runAfter": {
-                        "SetupCore": [
-                          "Succeeded"
-                        ]
-                      },
-                      "metadata": {
-                        "operationMetadataId": "24435626-aef9-49de-b6fa-e0c358af693c"
-                      },
-                      "type": "Scope"
                     }
                   },
                   "runAfter": {
@@ -2290,7 +2280,7 @@
                                   "item/admin_helplink": "@items('Apply_to_each_-_Flow')['HelpLink']",
                                   "item/admin_installorder": "@items('Apply_to_each_-_Flow')['InstallOrder']",
                                   "item/admin_objectguid": "@if(equals(length(body('Filter_array_-_Flows')), 0), '',  first(body('Filter_array_-_Flows'))?['GUID'])",
-                                  "item/admin_objectismanaged": "@if(equals(items('Apply_to_each_-_Flow')['CoESolution'], 'Core'),  outputs('CoreIsManaged'), if(equals(items('Apply_to_each_-_Flow')['CoESolution'], 'Audit Logs'),  outputs('AuditLogsIsManaged'), if(equals(items('Apply_to_each_-_Flow')['CoESolution'], 'Governance'),  outputs('GovernanceIsManaged'), if(equals(items('Apply_to_each_-_Flow')['CoESolution'], 'Innovation Backlog'),  outputs('InnovationBacklogIsManaged'), if(equals(items('Apply_to_each_-_Flow')['CoESolution'], 'Nurture'),  outputs('NurtureIsManaged'), if(equals(items('Apply_to_each_-_Flow')['CoESolution'], 'test soln'),  outputs('TestIsManaged'), true))))))",
+                                  "item/admin_objectismanaged": "@if(equals(items('Apply_to_each_-_Flow')['CoESolution'], 'Core'),  outputs('CoreIsManaged'), if(equals(items('Apply_to_each_-_Flow')['CoESolution'], 'Governance'),  outputs('GovernanceIsManaged'), if(equals(items('Apply_to_each_-_Flow')['CoESolution'], 'Innovation Backlog'),  outputs('InnovationBacklogIsManaged'), if(equals(items('Apply_to_each_-_Flow')['CoESolution'], 'Nurture'),  outputs('NurtureIsManaged'), if(equals(items('Apply_to_each_-_Flow')['CoESolution'], 'test soln'),  outputs('TestIsManaged'), true)))))",
                                   "item/admin_objectmakerurl": "@if(equals(length(body('Filter_array_-_Flows')), 0), '',  first(body('Filter_array_-_Flows'))?['MakerURL'])",
                                   "item/admin_objectsolutionguid": "@outputs('WorkflowEntityID')",
                                   "item/admin_objecttype": "@items('Apply_to_each_-_Flow')['ObjectType']",
@@ -2298,7 +2288,7 @@
                                   "item/admin_persona": "@items('Apply_to_each_-_Flow')['Persona']",
                                   "item/admin_rerunonupgrade": "@items('Apply_to_each_-_Flow')['RunOnUpgrade']",
                                   "item/admin_shipon": "@items('Apply_to_each_-_Flow')['ShipOn']",
-                                  "item/admin_solutionid": "@if(equals(items('Apply_to_each_-_Flow')['CoESolution'], 'Core'),  outputs('CoreID'), if(equals(items('Apply_to_each_-_Flow')['CoESolution'], 'Audit Logs'),  outputs('AuditLogsID'), if(equals(items('Apply_to_each_-_Flow')['CoESolution'], 'Governance'),  outputs('GovernanceID'), if(equals(items('Apply_to_each_-_Flow')['CoESolution'], 'Innovation Backlog'),  outputs('InnovationBacklogID'), if(equals(items('Apply_to_each_-_Flow')['CoESolution'], 'Nurture'),  outputs('NurtureID'), if(equals(items('Apply_to_each_-_Flow')['CoESolution'], 'test soln'),  outputs('TestID'), 'error'))))))",
+                                  "item/admin_solutionid": "@if(equals(items('Apply_to_each_-_Flow')['CoESolution'], 'Core'),  outputs('CoreID'), if(equals(items('Apply_to_each_-_Flow')['CoESolution'], 'Governance'),  outputs('GovernanceID'), if(equals(items('Apply_to_each_-_Flow')['CoESolution'], 'Innovation Backlog'),  outputs('InnovationBacklogID'), if(equals(items('Apply_to_each_-_Flow')['CoESolution'], 'Nurture'),  outputs('NurtureID'), if(equals(items('Apply_to_each_-_Flow')['CoESolution'], 'test soln'),  outputs('TestID'), 'error')))))",
                                   "item/admin_usedforbyodlcoe": "@items('Apply_to_each_-_Flow')['UsedInByodlCoE']",
                                   "item/admin_usedforsyncflowcoe": "@items('Apply_to_each_-_Flow')['UsedInSyncFlowCoE']"
                                 },
@@ -2335,7 +2325,7 @@
                                     "item/admin_helplink": "@items('Apply_to_each_-_Flow')['HelpLink']",
                                     "item/admin_installorder": "@items('Apply_to_each_-_Flow')['InstallOrder']",
                                     "item/admin_objectguid": "@if(equals(length(body('Filter_array_-_Flows')), 0), '',  first(body('Filter_array_-_Flows'))?['GUID'])",
-                                    "item/admin_objectismanaged": "@if(equals(items('Apply_to_each_-_Flow')['CoESolution'], 'Core'),  outputs('CoreIsManaged'), if(equals(items('Apply_to_each_-_Flow')['CoESolution'], 'Audit Logs'),  outputs('AuditLogsIsManaged'), if(equals(items('Apply_to_each_-_Flow')['CoESolution'], 'Governance'),  outputs('GovernanceIsManaged'), if(equals(items('Apply_to_each_-_Flow')['CoESolution'], 'Innovation Backlog'),  outputs('InnovationBacklogIsManaged'), if(equals(items('Apply_to_each_-_Flow')['CoESolution'], 'Nurture'),  outputs('NurtureIsManaged'), if(equals(items('Apply_to_each_-_Flow')['CoESolution'], 'test soln'),  outputs('TestIsManaged'), true))))))",
+                                    "item/admin_objectismanaged": "@if(equals(items('Apply_to_each_-_Flow')['CoESolution'], 'Core'),  outputs('CoreIsManaged'), if(equals(items('Apply_to_each_-_Flow')['CoESolution'], 'Governance'),  outputs('GovernanceIsManaged'), if(equals(items('Apply_to_each_-_Flow')['CoESolution'], 'Innovation Backlog'),  outputs('InnovationBacklogIsManaged'), if(equals(items('Apply_to_each_-_Flow')['CoESolution'], 'Nurture'),  outputs('NurtureIsManaged'), if(equals(items('Apply_to_each_-_Flow')['CoESolution'], 'test soln'),  outputs('TestIsManaged'), true)))))",
                                     "item/admin_objectmakerurl": "@if(equals(length(body('Filter_array_-_Flows')), 0), '',  first(body('Filter_array_-_Flows'))?['MakerURL'])",
                                     "item/admin_objectsolutionguid": "@outputs('WorkflowEntityID')",
                                     "item/admin_objecttype": "@items('Apply_to_each_-_Flow')['ObjectType']",
@@ -2343,7 +2333,7 @@
                                     "item/admin_persona": "@items('Apply_to_each_-_Flow')['Persona']",
                                     "item/admin_rerunonupgrade": "@items('Apply_to_each_-_Flow')['RunOnUpgrade']",
                                     "item/admin_shipon": "@items('Apply_to_each_-_Flow')['ShipOn']",
-                                    "item/admin_solutionid": "@if(equals(items('Apply_to_each_-_Flow')['CoESolution'], 'Core'),  outputs('CoreID'), if(equals(items('Apply_to_each_-_Flow')['CoESolution'], 'Audit Logs'),  outputs('AuditLogsID'), if(equals(items('Apply_to_each_-_Flow')['CoESolution'], 'Governance'),  outputs('GovernanceID'), if(equals(items('Apply_to_each_-_Flow')['CoESolution'], 'Innovation Backlog'),  outputs('InnovationBacklogID'), if(equals(items('Apply_to_each_-_Flow')['CoESolution'], 'Nurture'),  outputs('NurtureID'), if(equals(items('Apply_to_each_-_Flow')['CoESolution'], 'test soln'),  outputs('TestID'), 'error'))))))",
+                                    "item/admin_solutionid": "@if(equals(items('Apply_to_each_-_Flow')['CoESolution'], 'Core'),  outputs('CoreID'), if(equals(items('Apply_to_each_-_Flow')['CoESolution'], 'Governance'),  outputs('GovernanceID'), if(equals(items('Apply_to_each_-_Flow')['CoESolution'], 'Innovation Backlog'),  outputs('InnovationBacklogID'), if(equals(items('Apply_to_each_-_Flow')['CoESolution'], 'Nurture'),  outputs('NurtureID'), if(equals(items('Apply_to_each_-_Flow')['CoESolution'], 'test soln'),  outputs('TestID'), 'error')))))",
                                     "item/admin_usedforbyodlcoe": "@items('Apply_to_each_-_Flow')['UsedInByodlCoE']",
                                     "item/admin_usedforsyncflowcoe": "@items('Apply_to_each_-_Flow')['UsedInSyncFlowCoE']"
                                   },
@@ -4026,53 +4016,9 @@
                     ]
                   }
                 },
-                "Audit_Logs_Flows": {
-                  "runAfter": {
-                    "Core_Flows": [
-                      "Succeeded"
-                    ]
-                  },
-                  "metadata": {
-                    "operationMetadataId": "ffabcdfd-3922-40d0-8041-5e943c7d870c"
-                  },
-                  "type": "SetVariable",
-                  "inputs": {
-                    "name": "AuditLogsObjects",
-                    "value": [
-                      {
-                        "ObjectName": "Deprecated | [Child] Admin | Sync Logs",
-                        "CoESolution": "Audit Logs",
-                        "CoESolutionArea": "Audit Logs",
-                        "Flag": "",
-                        "HelpLink": "TBD",
-                        "ObjectType": "CloudFlows",
-                        "ShipOn": "False",
-                        "InstallOrder": "1",
-                        "RunOnUpgrade": "False",
-                        "UsedInSyncFlowCoE": "True",
-                        "UsedInByodlCoE": "False",
-                        "Persona": "TBD"
-                      },
-                      {
-                        "ObjectName": "Deprecated | Admin | Sync Audit Logs",
-                        "CoESolution": "Audit Logs",
-                        "CoESolutionArea": "Audit Logs",
-                        "Flag": "",
-                        "HelpLink": "TBD",
-                        "ObjectType": "CloudFlows",
-                        "ShipOn": "False",
-                        "InstallOrder": "2",
-                        "RunOnUpgrade": "False",
-                        "UsedInSyncFlowCoE": "True",
-                        "UsedInByodlCoE": "False",
-                        "Persona": "TBD"
-                      }
-                    ]
-                  }
-                },
                 "Governance_Flows": {
                   "runAfter": {
-                    "Audit_Logs_Flows": [
+                    "Core_Flows": [
                       "Succeeded"
                     ]
                   },
@@ -4436,7 +4382,7 @@
                     "operationMetadataId": "287b9b76-2c4f-4733-ad6d-a1092df6ac44"
                   },
                   "type": "Compose",
-                  "inputs": "@union(variables('CoreObjects'), if(equals(outputs('hasAuditLogs'), true), variables('AuditLogsObjects'), variables('CoreObjects')), if(equals(outputs('hasGovernance'), true), variables('GovernanceObjects'), variables('CoreObjects')), if(equals(outputs('hasInnovationBacklog'), true), variables('InnovationBacklogObjects'), variables('CoreObjects')), if(equals(outputs('hasNurture'), true), variables('NurtureObjects'), variables('CoreObjects')), if(equals(outputs('hasTest'), true), variables('TestObjects'), variables('CoreObjects')))"
+                  "inputs": "@union(variables('CoreObjects'), if(equals(outputs('hasGovernance'), true), variables('GovernanceObjects'), variables('CoreObjects')), if(equals(outputs('hasInnovationBacklog'), true), variables('InnovationBacklogObjects'), variables('CoreObjects')), if(equals(outputs('hasNurture'), true), variables('NurtureObjects'), variables('CoreObjects')), if(equals(outputs('hasTest'), true), variables('TestObjects'), variables('CoreObjects')))"
                 }
               },
               "runAfter": {

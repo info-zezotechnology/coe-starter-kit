@@ -188,7 +188,10 @@
                       "item/admin_appdeleted": true,
                       "item/admin_appdeletedon": "@utcNow()"
                     },
-                    "authentication": "@parameters('$authentication')"
+                    "authentication": {
+                      "type": "Raw",
+                      "value": "@json(decodeBase64(triggerOutputs().headers['X-MS-APIM-Tokens']))['$ConnectionKey']"
+                    }
                   }
                 }
               },
@@ -367,7 +370,6 @@
                         },
                         "body": {
                           "text": "@outputs('Get_App_as_Admin')?['body/properties/owner/id']",
-                          "text_1": "@outputs('Get_App_as_Admin')?['body/properties/owner/displayName']",
                           "boolean": false
                         }
                       }
@@ -412,7 +414,7 @@
                               "item/admin_appdescription": "@outputs('Get_App_as_Admin')?['body/properties/description']",
                               "item/admin_AppEnvironment@odata.bind": "admin_environments(@{triggerBody()['text']})",
                               "item/admin_appenvironmentdisplayname": "@outputs('Get_Evnt_Details')?['body/admin_displayname']",
-                              "item/admin_appenvironmentid": "@triggerBody()['text']",
+                              "item/admin_appenvironmentid": "@triggerBody()['text_1']",
                               "item/admin_appiconuri": "@outputs('Get_App_as_Admin')?['body/properties/backgroundImageUri']",
                               "item/cr5d5_appisorphaned": "Yes",
                               "item/admin_appmodifiedon": "@outputs('Get_App_as_Admin')?['body/properties/lastModifiedTime']",
@@ -438,7 +440,10 @@
                               "item/admin_usesonlygrandfatheredpremiumapis": "@coalesce(outputs('Get_App_as_Admin')?['body/properties/usesOnlyGrandfatheredPremiumApis'], '')",
                               "item/admin_usespremiumapi": "@coalesce(outputs('Get_App_as_Admin')?['body/properties/usesPremiumApi'], '')"
                             },
-                            "authentication": "@parameters('$authentication')"
+                            "authentication": {
+                              "type": "Raw",
+                              "value": "@json(decodeBase64(triggerOutputs().headers['X-MS-APIM-Tokens']))['$ConnectionKey']"
+                            }
                           }
                         }
                       },
@@ -472,7 +477,7 @@
                                 "item/admin_appdescription": "@outputs('Get_App_as_Admin')?['body/properties/description']",
                                 "item/admin_AppEnvironment@odata.bind": "admin_environments(@{triggerBody()['text']})",
                                 "item/admin_appenvironmentdisplayname": "@outputs('Get_Evnt_Details')?['body/admin_displayname']",
-                                "item/admin_appenvironmentid": "@triggerBody()['text']",
+                                "item/admin_appenvironmentid": "@triggerBody()['text_1']",
                                 "item/admin_appiconuri": "@outputs('Get_App_as_Admin')?['body/properties/backgroundImageUri']",
                                 "item/cr5d5_appisorphaned": "No",
                                 "item/admin_appmodifiedon": "@outputs('Get_App_as_Admin')?['body/properties/lastModifiedTime']",
@@ -502,7 +507,10 @@
                                 "item/admin_usesonlygrandfatheredpremiumapis": "@coalesce(outputs('Get_App_as_Admin')?['body/properties/usesOnlyGrandfatheredPremiumApis'], '')",
                                 "item/admin_usespremiumapi": "@coalesce(outputs('Get_App_as_Admin')?['body/properties/usesPremiumApi'], '')"
                               },
-                              "authentication": "@parameters('$authentication')"
+                              "authentication": {
+                                "type": "Raw",
+                                "value": "@json(decodeBase64(triggerOutputs().headers['X-MS-APIM-Tokens']))['$ConnectionKey']"
+                              }
                             }
                           }
                         }
@@ -539,6 +547,9 @@
                           "actions": {
                             "Set_AppType_to_AppComponentLibrary": {
                               "runAfter": {},
+                              "metadata": {
+                                "operationMetadataId": "1a5d3df1-3926-4854-948b-92163fda82aa"
+                              },
                               "type": "SetVariable",
                               "inputs": {
                                 "name": "AppType",
@@ -552,6 +563,9 @@
                           "actions": {
                             "Set_AppType_to_CustomCanvasPage": {
                               "runAfter": {},
+                              "metadata": {
+                                "operationMetadataId": "f9e1df72-35c1-4045-9bdd-2b85f1eb863e"
+                              },
                               "type": "SetVariable",
                               "inputs": {
                                 "name": "AppType",
@@ -565,6 +579,9 @@
                         "actions": {
                           "Set_AppType_to_Sharepoint_or_Canvas": {
                             "runAfter": {},
+                            "metadata": {
+                              "operationMetadataId": "c39d0e22-8019-4bcb-83ce-9695a8c77d77"
+                            },
                             "type": "SetVariable",
                             "inputs": {
                               "name": "AppType",
@@ -1250,7 +1267,7 @@
                                 "parameters": {
                                   "entityName": "admin_connectionreferences",
                                   "$select": "admin_connectionreferenceid",
-                                  "$filter": "_admin_app_value eq '@{triggerBody()['text_2']}' and _admin_connector_value eq '@{items('Delete_each')?['ConnectorID']}' and admin_displayname eq '@{items('Delete_each')?['DisplayName']}'"
+                                  "$filter": "_admin_app_value eq '@{triggerBody()['text_2']}' and _admin_connector_value eq '@{items('Delete_each')?['ConnectorID']}' and admin_displayname eq '@{replace(items('Delete_each')?['DisplayName'], '''', '''''')}'"
                                 },
                                 "authentication": {
                                   "type": "Raw",
@@ -1340,7 +1357,10 @@
                                   "item/admin_App@odata.bind": "admin_apps(@{triggerBody()['text_2']})",
                                   "item/admin_Connector@odata.bind": "admin_connectors(@{items('Apply_to_each_new_connection')?['ConnectorID']})"
                                 },
-                                "authentication": "@parameters('$authentication')"
+                                "authentication": {
+                                  "type": "Raw",
+                                  "value": "@json(decodeBase64(triggerOutputs().headers['X-MS-APIM-Tokens']))['$ConnectionKey']"
+                                }
                               }
                             }
                           },
@@ -1538,7 +1558,10 @@
                   "item/admin_lastrun": "@utcNow()",
                   "item/admin_lastrunpassed": false
                 },
-                "authentication": "@parameters('$authentication')"
+                "authentication": {
+                  "type": "Raw",
+                  "value": "@json(decodeBase64(triggerOutputs().headers['X-MS-APIM-Tokens']))['$ConnectionKey']"
+                }
               }
             },
             "Respond_to_a_PowerApp_or_flow_false": {
@@ -1587,12 +1610,15 @@
                   "item/admin_environmentname": "@outputs('Get_Evnt_Details')?['body/admin_displayname']",
                   "item/admin_flowinstanceurl": "@concat(parameters('Power Automate Environment Variable (admin_PowerAutomateEnvironmentVariable)'), workflow()?['tags']['environmentName'], '/flows/', workflow()?['name'], '/runs/', workflow()?['run']['name'])"
                 },
+                "authentication": {
+                  "type": "Raw",
+                  "value": "@json(decodeBase64(triggerOutputs().headers['X-MS-APIM-Tokens']))['$ConnectionKey']"
+                },
                 "retryPolicy": {
                   "type": "exponential",
                   "count": 10,
                   "interval": "PT10S"
-                },
-                "authentication": "@parameters('$authentication')"
+                }
               }
             }
           },
@@ -1630,7 +1656,10 @@
                   "item/admin_lastrun": "@utcNow()",
                   "item/admin_lastrunpassed": true
                 },
-                "authentication": "@parameters('$authentication')"
+                "authentication": {
+                  "type": "Raw",
+                  "value": "@json(decodeBase64(triggerOutputs().headers['X-MS-APIM-Tokens']))['$ConnectionKey']"
+                }
               }
             },
             "Catch_-_not_ready_to_take_last_run_date": {

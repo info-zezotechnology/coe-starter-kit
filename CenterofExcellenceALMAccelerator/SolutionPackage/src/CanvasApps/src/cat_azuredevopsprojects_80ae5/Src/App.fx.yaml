@@ -13,4 +13,12 @@ App As appinfo:
             NotificationType.Error
         );
         */
+    StartScreen: =
+
+    Host As hostControl.DefaultHostControlVariant:
+        OnCancel: =false
+        OnEdit: =false
+        OnNew: =false
+        OnSave: =false
+        OnView: =false
 

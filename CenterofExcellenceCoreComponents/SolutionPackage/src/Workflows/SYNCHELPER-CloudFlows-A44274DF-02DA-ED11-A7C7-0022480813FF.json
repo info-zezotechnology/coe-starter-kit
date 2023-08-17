@@ -321,8 +321,9 @@
                               "item/admin_flowdescription": "@body('Parse_Flow_JSON')?['properties']?['definitionSummary']?['description']",
                               "item/admin_FlowEnvironment@odata.bind": "admin_environments(@{triggerBody()['text']})",
                               "item/admin_flowenvironmentdisplayname": "@outputs('Get_Evnt_Details')?['body/admin_displayname']",
-                              "item/admin_flowenvironmentid": "@triggerBody()['text']",
+                              "item/admin_flowenvironmentid": "@triggerBody()['text_1']",
                               "item/cr5d5_flowisorphaned": "Yes",
+                              "item/admin_flowispublished": true,
                               "item/admin_flowmodifiedon": "@outputs('Get_Flow_as_Admin')?['body/properties/lastModifiedTime']",
                               "item/admin_flowstate": "@outputs('Get_Flow_as_Admin')?['body/properties/state']",
                               "item/admin_flowsuspensionreason": "@body('Parse_Flow_JSON')?['properties']?['flowSuspensionReason']",
@@ -378,8 +379,9 @@
                                 "item/admin_flowdescription": "@body('Parse_Flow_JSON')?['properties']?['definitionSummary']?['description']",
                                 "item/admin_FlowEnvironment@odata.bind": "admin_environments(@{triggerBody()['text']})",
                                 "item/admin_flowenvironmentdisplayname": "@outputs('Get_Evnt_Details')?['body/admin_displayname']",
-                                "item/admin_flowenvironmentid": "@triggerBody()['text']",
+                                "item/admin_flowenvironmentid": "@triggerBody()['text_1']",
                                 "item/cr5d5_flowisorphaned": "No",
+                                "item/admin_flowispublished": true,
                                 "item/admin_flowmakerdisplayname": "@body('Maker_Check_-_Derived_Owner')?['userdisplayname']",
                                 "item/admin_flowmodifiedon": "@outputs('Get_Flow_as_Admin')?['body/properties/lastModifiedTime']",
                                 "item/admin_flowstate": "@outputs('Get_Flow_as_Admin')?['body/properties/state']",
@@ -1548,7 +1550,7 @@
                                 "parameters": {
                                   "entityName": "admin_connectionreferences",
                                   "$select": "admin_connectionreferenceid",
-                                  "$filter": "_admin_flow_value eq '@{items('Delete_each')?['FlowID']}' and _admin_connector_value eq '@{items('Delete_each')?['ConnectorID']}' and admin_displayname eq '@{items('Delete_each')?['DisplayName']}'"
+                                  "$filter": "_admin_flow_value eq '@{items('Delete_each')?['FlowID']}' and _admin_connector_value eq '@{items('Delete_each')?['ConnectorID']}' and admin_displayname eq '@{replace(items('Delete_each')?['DisplayName'], '''', '''''')}'"
                                 },
                                 "authentication": {
                                   "type": "Raw",

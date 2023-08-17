@@ -1562,7 +1562,12 @@
                                   "environmentName": "@items('Apply_to_each_flow_with_specialty_connectors')?['EnvtName']",
                                   "flowName": "@items('Apply_to_each_flow_with_specialty_connectors')?['FlowID']"
                                 },
-                                "authentication": "@parameters('$authentication')"
+                                "authentication": "@parameters('$authentication')",
+                                "retryPolicy": {
+                                  "type": "exponential",
+                                  "count": 30,
+                                  "interval": "PT30S"
+                                }
                               }
                             },
                             "Parse_Flow_Definition": {
@@ -1790,29 +1795,6 @@
                 "Apply_to_each_identified_to_delete": {
                   "foreach": "@body('RemoveFromInventory')",
                   "actions": {
-                    "Delete_it": {
-                      "runAfter": {
-                        "Find_it_for_ID": [
-                          "Succeeded"
-                        ]
-                      },
-                      "metadata": {
-                        "operationMetadataId": "8a3d4ac8-00f1-44fe-8412-14339dc0452e"
-                      },
-                      "type": "OpenApiConnection",
-                      "inputs": {
-                        "host": {
-                          "connectionName": "shared_commondataserviceforapps_2",
-                          "operationId": "DeleteRecord",
-                          "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
-                        },
-                        "parameters": {
-                          "entityName": "admin_flowactiondetails",
-                          "recordId": "@first(outputs('Find_it_for_ID')?['body/value'])?['admin_flowactiondetailid']"
-                        },
-                        "authentication": "@parameters('$authentication')"
-                      }
-                    },
                     "Start_of_filterString_": {
                       "runAfter": {},
                       "metadata": {
@@ -1992,6 +1974,44 @@
                       },
                       "metadata": {
                         "operationMetadataId": "800acd2d-9546-42b0-a572-b88e71c52c80"
+                      },
+                      "type": "If"
+                    },
+                    "Avoid_failure_for_symultaneous_run": {
+                      "actions": {
+                        "Delete_it": {
+                          "runAfter": {},
+                          "metadata": {
+                            "operationMetadataId": "8a3d4ac8-00f1-44fe-8412-14339dc0452e"
+                          },
+                          "type": "OpenApiConnection",
+                          "inputs": {
+                            "host": {
+                              "connectionName": "shared_commondataserviceforapps_2",
+                              "operationId": "DeleteRecord",
+                              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+                            },
+                            "parameters": {
+                              "entityName": "admin_flowactiondetails",
+                              "recordId": "@first(outputs('Find_it_for_ID')?['body/value'])?['admin_flowactiondetailid']"
+                            },
+                            "authentication": "@parameters('$authentication')"
+                          }
+                        }
+                      },
+                      "runAfter": {
+                        "Find_it_for_ID": [
+                          "Succeeded"
+                        ]
+                      },
+                      "expression": {
+                        "greater": [
+                          "@length(outputs('Find_it_for_ID')?['body/value'])",
+                          0
+                        ]
+                      },
+                      "metadata": {
+                        "operationMetadataId": "00bf86e7-68e9-46d5-bfeb-eb2ced643997"
                       },
                       "type": "If"
                     }
@@ -2228,7 +2248,7 @@
                     "operationMetadataId": "d74117fa-5d53-4503-9352-751f96ef2122"
                   },
                   "type": "Compose",
-                  "inputs": "@if(equals(parameters('FullInventory (admin_FullInventory)'), true), getPastTime(10, 'Year'), if(equals(outputs('lastRunStartedIsBlank'), true), getPastTime(1, 'Week'), addToTime(first(outputs('Get_ID_of_this_flow_from_metatdata')?['body/value'])['admin_lastrunstarted'], -5, 'Minute')))"
+                  "inputs": "@if(equals(parameters('FullInventory (admin_FullInventory)'), true), getPastTime(10, 'Year'), if(equals(outputs('lastRunStartedIsBlank'), true), getPastTime(1, 'Week'), addToTime(first(outputs('Get_ID_of_this_flow_from_metatdata')?['body/value'])['admin_lastrunstarted'], -1, 'Day')))"
                 },
                 "Flows_to_iterate": {
                   "runAfter": {
@@ -2249,7 +2269,7 @@
                     "parameters": {
                       "entityName": "admin_flows",
                       "$select": "admin_flowid, _admin_flowenvironment_value, admin_flowmodifiedon, cr5d5_flowtrigger, admin_containsplaintextpassword, _admin_derivedowner_value",
-                      "$filter": "admin_flowdeleted ne true and admin_flowmodifiedon gt @{outputs('FlowsModifiedSince')} and _admin_flowenvironment_value eq @{triggerOutputs()?['body/admin_environmentid']}",
+                      "$filter": "admin_flowdeleted ne true and admin_flowmodifiedon gt @{outputs('FlowsModifiedSince')} and _admin_flowenvironment_value eq @{triggerOutputs()?['body/admin_environmentid']} and admin_flowispublished ne false",
                       "$orderby": "admin_flowmodifiedon",
                       "$expand": "admin_FlowEnvironment($select=admin_environmentname)"
                     },

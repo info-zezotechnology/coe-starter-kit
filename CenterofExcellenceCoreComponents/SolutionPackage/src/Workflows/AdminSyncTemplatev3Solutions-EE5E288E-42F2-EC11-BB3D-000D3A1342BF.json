@@ -50,7 +50,7 @@
           }
         },
         "FullInventory (admin_FullInventory)": {
-          "defaultValue": false,
+          "defaultValue": true,
           "type": "Bool",
           "metadata": {
             "schemaName": "admin_FullInventory",
@@ -343,7 +343,7 @@
                     },
                     "Select_BPF_IDs_from_Inventory": {
                       "runAfter": {
-                        "List_related_BPFs": [
+                        "Filter_out_null_BPFs": [
                           "Succeeded"
                         ]
                       },
@@ -352,7 +352,7 @@
                       },
                       "type": "Select",
                       "inputs": {
-                        "from": "@outputs('List_related_BPFs')?['body/value']",
+                        "from": "@body('Filter_out_null_BPFs')",
                         "select": {
                           "ObjectID": "@item()?['admin_businessprocessflows1.admin_businessprocessflowworkflowentityid']"
                         }
@@ -458,6 +458,21 @@
                             ]
                           }
                         }
+                      }
+                    },
+                    "Filter_out_null_BPFs": {
+                      "runAfter": {
+                        "List_related_BPFs": [
+                          "Succeeded"
+                        ]
+                      },
+                      "metadata": {
+                        "operationMetadataId": "57d2c261-42f5-4db3-b78c-2de0ef08109c"
+                      },
+                      "type": "Query",
+                      "inputs": {
+                        "from": "@outputs('List_related_BPFs')?['body/value']",
+                        "where": "@not(equals(item()?['admin_businessprocessflows1.admin_businessprocessflowworkflowentityid'], null))"
                       }
                     }
                   },
@@ -1232,8 +1247,7 @@
                                   "workflowReferenceName": "9301f01a-cb40-ec11-8c62-00224829b4c1"
                                 },
                                 "body": {
-                                  "text": "@if(equals(body('Get_Soln_Owner')?['azureactivedirectoryobjectid'], null), '', body('Get_Soln_Owner')?['azureactivedirectoryobjectid'])",
-                                  "text_1": "@body('Get_Soln_Owner')?['fullname']",
+                                  "text": "@if(equals(body('Get_Soln_Owner')?['azureactivedirectoryobjectid'], null), if(equals(body('Get_Soln_Owner')?['fullname'], 'SYSTEM'), 'SYSTEM', ''),  body('Get_Soln_Owner')?['azureactivedirectoryobjectid'])",
                                   "boolean": false
                                 }
                               }
@@ -1371,8 +1385,7 @@
                                 "workflowReferenceName": "9301f01a-cb40-ec11-8c62-00224829b4c1"
                               },
                               "body": {
-                                "text": "@if(equals(body('Get_Soln_Owner')?['azureactivedirectoryobjectid'], null), '', body('Get_Soln_Owner')?['azureactivedirectoryobjectid'])",
-                                "text_1": "@body('Get_Soln_Owner')?['fullname']",
+                                "text": "@if(equals(body('Get_Soln_Owner')?['azureactivedirectoryobjectid'], null), if(equals(body('Get_Soln_Owner')?['fullname'], 'SYSTEM'), 'SYSTEM', ''),  body('Get_Soln_Owner')?['azureactivedirectoryobjectid'])",
                                 "boolean": false
                               }
                             }
@@ -1506,7 +1519,12 @@
                           "table": "publishers",
                           "id": "@items('Apply_to_each_Soln_Object')?['_publisherid_value']"
                         },
-                        "authentication": "@parameters('$authentication')"
+                        "authentication": "@parameters('$authentication')",
+                        "retryPolicy": {
+                          "type": "exponential",
+                          "count": 20,
+                          "interval": "PT20S"
+                        }
                       }
                     },
                     "Get_Soln_Owner": {
@@ -1530,7 +1548,12 @@
                           "table": "systemusers",
                           "id": "@items('Apply_to_each_Soln_Object')?['_createdby_value']"
                         },
-                        "authentication": "@parameters('$authentication')"
+                        "authentication": "@parameters('$authentication')",
+                        "retryPolicy": {
+                          "type": "exponential",
+                          "count": 20,
+                          "interval": "PT20S"
+                        }
                       }
                     },
                     "Reset_Soln_NeedsUpdatedInCoE": {
@@ -1592,7 +1615,12 @@
                           "$select": "admin_solutionid, admin_solutionmodifiedon, admin_solutionenvtguid, admin_solutionenvtobjectguidstring",
                           "$filter": "admin_solutionenvtobjectguidstring eq '@{outputs('UniqueNameString')}'"
                         },
-                        "authentication": "@parameters('$authentication')"
+                        "authentication": "@parameters('$authentication')",
+                        "retryPolicy": {
+                          "type": "exponential",
+                          "count": 20,
+                          "interval": "PT20S"
+                        }
                       }
                     },
                     "If_did_not_return_rows_then_new_to_Coe_else_get_GUID": {
